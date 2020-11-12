@@ -1,0 +1,547 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"conti",
+				"continuous_start"
+			],
+			[
+				"H1Nor",
+				"H1NormPrev"
+			],
+			[
+				"Soltio",
+				"Solution_linear"
+			],
+			[
+				"a_sol",
+				"a_solution"
+			],
+			[
+				"output",
+				"output_solution"
+			],
+			[
+				"basis",
+				"basisLegendre"
+			],
+			[
+				"get_no",
+				"get_noNodes"
+			],
+			[
+				"curre",
+				"currentFace"
+			],
+			[
+				"nextEle",
+				"nextElementDoFs"
+			],
+			[
+				"prevElement",
+				"prevElementDoFs"
+			],
+			[
+				"baiss",
+				"basisLegendre"
+			],
+			[
+				"prev",
+				"prevElement"
+			],
+			[
+				"prevEle",
+				"prevElement"
+			],
+			[
+				"get_nmo",
+				"get_noColumns"
+			],
+			[
+				"current",
+				"currentFace"
+			],
+			[
+				"exter",
+				"exteriorFaces"
+			],
+			[
+				"get_dg_",
+				"get_dg_elementDoFs"
+			],
+			[
+				"linear",
+				"linearSystems"
+			],
+			[
+				"face",
+				"faceNo"
+			],
+			[
+				"Solut",
+				"Solution_dg_linear"
+			],
+			[
+				"nextElement",
+				"nextElementDoFs"
+			],
+			[
+				"Solu",
+				"Solution_dg_linear"
+			],
+			[
+				"no",
+				"get_noColumns"
+			],
+			[
+				"exp",
+				"exponential"
+			],
+			[
+				"get_the_au",
+				"get_the_author_meta"
+			],
+			[
+				"user-",
+				"user-password"
+			],
+			[
+				"sm",
+				"xx-small\tfont-size"
+			],
+			[
+				"lar",
+				"xx-large\tfont-size"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					"Run"
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					""
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					"Clean"
+				]
+			],
+			[
+				"Packages/C++/C++ Single File.sublime-build",
+				"Run"
+			]
+		],
+		[
+			[
+				[
+					"Packages/Fortran/build-systems/GFortran.sublime-build",
+					""
+				],
+				[
+					"Packages/Fortran/build-systems/GFortran.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/Fortran/build-systems/GFortran.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Makefile/Make.sublime-build",
+					""
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					"Clean"
+				]
+			],
+			[
+				"Packages/Makefile/Make.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Makefile/Make.sublime-build",
+					""
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					"Clean"
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Makefile/Make.sublime-build",
+					""
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					"Clean"
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				],
+				[
+					"Packages/User/MakeRun.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 220.0,
+		"history":
+		[
+			"gfortran -help",
+			"gfortran -o hello hello.f03",
+			"gfortran -o test test.f03"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM"
+	],
+	"file_history":
+	[
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/PhD Blakey FEM/PhD_BlakeyFEM/src/common.hpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/PhD Blakey FEM/PhD_BlakeyFEM/src/common.cpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/PhD Blakey FEM/PhD_BlakeyFEM/tests/test_dg_boundary.cpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/PhD Blakey FEM/PhD_BlakeyFEM/src/solution_dg_linear.cpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/PhD Blakey FEM/PhD_BlakeyFEM/src/refinement.cpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/PhD Blakey FEM/PhD_BlakeyFEM/makefile",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/PhD Blakey FEM/PhD_BlakeyFEM/tests/h_boundary.cpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/PhD Blakey FEM/PhD_BlakeyFEM/src/solution_linear.cpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/PhD Blakey FEM/PhD_BlakeyFEM/src/solution_dg_linear.hpp",
+		"/C/Users/adam/Downloads/test.cpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/PhD Blakey FEM/PhD_BlakeyFEM/src/solution.cpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/PhD Blakey FEM/PhD_BlakeyFEM/data/solution.dat",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/AptoFEM DG/rhs_vec_AptoFEM_4363_1.dat",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/AptoFEM DG/sp_matrix_AptoFEM_4363_1.dat",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/PhD Blakey FEM/PhD_BlakeyFEM/src/linearSystems.cpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/PhD Blakey FEM/PhD_BlakeyFEM/src/element.cpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/PhD Blakey FEM/PhD_BlakeyFEM/README.md",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/PhD Blakey FEM/PhD_BlakeyFEM/test.cpp",
+		"/C/Users/adam/AppData/Roaming/Sublime Text 3/Packages/WakaTime/WakaTime.sublime-settings",
+		"/C/Users/adam/AppData/Roaming/Sublime Text 3/Packages/User/WakaTime.sublime-settings",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/PhD Blakey FEM/PhD_BlakeyFEM/src/solution.hpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Blakey FEM (old)/src/solution_dg_linear.cpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Blakey FEM (old)/README.md",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Blakey FEM/src/plot_solution.py",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Poisson Fortran Solver/poisson1d.f90",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Blakey FEM/tests/h_dg_boundary.cpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Blakey FEM/src/plot_convergence.py",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Blakey FEM/tests/test_dg_boundary.cpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Blakey FEM/src/solution_dg_linear.cpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Blakey FEM/data/solution.dat",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Blakey FEM/src/element.cpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Blakey FEM/tests/h_dg_sin.cpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Blakey FEM/src/solution.hpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Blakey FEM/src/element.hpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Blakey FEM/src/solution_dg_linear.hpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Blakey FEM/src/solution.cpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Blakey FEM/tests/hp_sin.cpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Blakey FEM/src/refinement.cpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Blakey FEM/src/quadrature.cpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Blakey FEM/src/solution_nonlinear.cpp",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Blakey FEM/src/solution_linear.cpp",
+		"/C/Users/adam/Downloads/kevents/kevents/app/features/popup/shortcode.php",
+		"/C/Users/adam/Downloads/kevents/kevents/app/libraries/factory.php",
+		"/C/Users/adam/Downloads/adam.blakey.family/projects.php",
+		"/C/Users/adam/Desktop/index.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/hello.f03",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's New Website/wp-content/plugins/modern-events-calendar-lite-modified/app/skins/single/default.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's New Website/wp-content/themes/twentytwenty/functions.php",
+		"/C/Users/adam/Blakey Cloud/House Expenses.txt",
+		"/C/Users/adam/Desktop/index.html",
+		"/C/Users/adam/Desktop/test.js",
+		"/C/Users/adam/Downloads/htaccess",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/kadbcon2.inc",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/.htaccess",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/guestbook.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/lpane.inc",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/article.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/articles-add.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/articles-update.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/articles.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/createfeed.inc",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/createpodcast.inc",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/diary-book.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/diary-confirm.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/diary-delete.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/diary-reject.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/diary-update.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/events-add.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/events-createhtml.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/events-update.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/events.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/files-update.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/files.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/guestbook-update.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/guestbook.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/ipane-createhtml.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/links-add.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/links-createhtml.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/links-update.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/links.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/news.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/podcast.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/article.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ensarticles.inc",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/guestbook.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/lpane.inc",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/article.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/articles-add.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/articles-update.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/articles.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/createfeed.inc",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/createpodcast.inc",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/diary-book.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/diary-confirm.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/diary-delete.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/diary-reject.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/diary-update.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/events-add.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/events-createhtml.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/events-update.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/events.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/files-update.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/files.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/guestbook-update.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/guestbook.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/ipane-createhtml.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/links-add.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/links-createhtml.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/links-update.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/links.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/news.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/podcast.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/igs/htdocs/ka/createpodcast.inc",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/article.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ensarticles.inc",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/extras.inc",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/extras.inc",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/index.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/diary-dates.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/diary-requested.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/diary.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/events-pos.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/links-pos.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/login.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/password.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/articles.php",
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ka/diary-dates.php"
+	],
+	"find":
+	{
+		"height": 22.0
+	},
+	"find_in_files":
+	{
+		"height": 178.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 22.0
+	},
+	"input":
+	{
+		"height": 41.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 237.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "Forkey FEM.sublime-project",
+	"replace":
+	{
+		"height": 40.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"C:\\Users\\adam\\Blakey Cloud\\Documents\\Education\\University of Nottingham\\PhD\\G14UQN\\G14UQN.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 269.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
