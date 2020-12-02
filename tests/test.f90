@@ -23,6 +23,7 @@ program test
     nodeCoordinates(2) = 1
 
     my_element = element_interval(elementNo, noNodes, nodeIndices, nodeCoordinates, polynomialDegree)
+    print *, my_element%elementNo
 
     deallocate(nodeCoordinates)
 end program test

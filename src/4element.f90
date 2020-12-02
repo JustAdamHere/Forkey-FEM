@@ -14,21 +14,8 @@ module class_element
         real(dp), dimension(:), allocatable :: nodeCoordinates
     contains
         ! Getters.
-        procedure                                            :: get_elementNo
         procedure(interface_get_elementQuadrature), deferred :: get_elementQuadrature
         procedure(interface_get_Jacobian), deferred          :: get_Jacobian
-        procedure                                            :: get_nodeCoordinates
-        procedure                                            :: get_nodeIndices
-        procedure                                            :: get_noNodes
-        procedure                                            :: get_polynomialDegree
-        procedure                                            :: get_rawNodeCoordinates
-
-        ! Setters.
-        procedure :: set_elementNo
-        procedure :: set_nodeCoordinates
-        procedure :: set_nodeIndices
-        procedure :: set_noNodes
-        procedure :: set_polynomialDegree
 
         ! Misc methods.
         procedure(interface_basisLegendre), deferred    :: basisLegendre
@@ -95,80 +82,5 @@ module class_element
     end interface
 
 contains
-    function get_elementNo(this)
-        class(element), intent(inout) :: this
-        integer                       :: get_elementNo
-
-        get_elementNo = this%elementNo
-    end function get_elementNo
-
-    function get_nodeCoordinates(this)
-        class(element), intent(inout) :: this
-        real(dp), dimension(2)        :: get_nodeCoordinates
-
-        get_nodeCoordinates = this%nodeCoordinates
-    end function get_nodeCoordinates
-
-    function get_nodeIndices(this)
-        class(element), intent(inout) :: this
-        integer, dimension(2)         :: get_nodeIndices
-
-        get_nodeIndices = this%nodeIndices
-    end function get_nodeIndices
-
-    function get_noNodes(this)
-        class(element), intent(inout) :: this
-        integer                       :: get_noNodes
-
-        get_noNodes = this%noNodes
-    end function get_noNodes
-
-    function get_polynomialDegree(this)
-        class(element), intent(inout) :: this
-        integer                       :: get_polynomialDegree
-
-        get_polynomialDegree = this%polynomialDegree
-    end function get_polynomialDegree
-
-    function get_rawNodeCoordinates(this)
-        class(element), intent(inout)   :: this
-        real(dp), dimension(:), pointer :: get_rawNodeCoordinates
-
-        get_rawNodeCoordinates = this%nodeCoordinates
-    end function get_rawNodeCoordinates
-
-    subroutine set_elementNo(this, a_elementNo)
-        class(element), intent(inout) :: this
-        integer                       :: a_elementNo
-
-        this%elementNo = a_elementNo
-    end subroutine set_elementNo
-
-    subroutine set_nodeCoordinates(this, a_nodeCoordinates)
-        class(element), intent(inout)       :: this
-        real(dp), dimension(:), allocatable :: a_nodeCoordinates
-
-        this%nodeCoordinates = a_nodeCoordinates
-    end subroutine set_nodeCoordinates
-        
-    subroutine set_nodeIndices(this, a_nodeIndices)
-        class(element), intent(inout) :: this
-        integer, dimension(2)         :: a_nodeIndices
-
-        this%nodeIndices = a_nodeIndices
-    end subroutine set_nodeIndices
-        
-    subroutine set_noNodes(this, a_noNodes)
-        class(element), intent(inout) :: this
-        integer                       :: a_noNodes
-
-        this%noNodes = a_noNodes
-    end subroutine set_noNodes
-
-    subroutine set_polynomialDegree(this, a_polynomialDegree)
-        class(element), intent(inout) :: this
-        integer                       :: a_polynomialDegree
-
-        this%polynomialDegree = a_polynomialDegree
-    end subroutine set_polynomialDegree
+    
 end module class_element
