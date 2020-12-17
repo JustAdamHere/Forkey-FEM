@@ -1,0 +1,6 @@
+SRCS = common.f90 \
+	point.f90 \
+	quadrature.f90 \
+	element.f90 \
+	element_interval.f90 \
+	mesh.f90

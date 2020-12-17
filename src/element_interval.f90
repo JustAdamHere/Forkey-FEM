@@ -5,38 +5,49 @@ module class_element_interval
 
     implicit none
 
-    type, extends(element) :: element_interval
+    private
+    public :: element_interval
+
+    type, extends(element_types) :: element_interval
 
     contains
+        ! Constructors.
+        procedure :: constructor => element_interval_constructor
+
+        ! Destructors.
+        procedure :: destructor => element_interval_destructor
+
         ! Getters.
         procedure :: get_elementQuadrature
         procedure :: get_Jacobian
 
         ! Misc methods.
-        procedure :: basisLobatto
         procedure :: basisLegendre
+        procedure :: basisLobatto
         procedure :: mapLocalToGlobal
     end type element_interval
 
-    interface element_interval
-        procedure constructor
-    end interface
-
 contains
-    function constructor(a_elementNo, a_noNodes, a_nodeIndices, a_nodeCoordinates, a_polynomialDegree)
-        type(element_interval)                          :: constructor
+    subroutine element_interval_constructor(this, a_elementNo, a_noNodes, a_nodeIndices, a_nodeCoordinates, a_polynomialDegree)
+        class(element_interval)                         :: this
         integer, intent(in)                             :: a_elementNo
         integer, intent(in)                             :: a_noNodes
         integer, dimension(2), intent(in)               :: a_nodeIndices
         real(dp), dimension(:), allocatable, intent(in) :: a_nodeCoordinates
         integer, intent(in)                             :: a_polynomialDegree
 
-        constructor%elementNo        = a_elementNo
-        constructor%noNodes          = a_noNodes
-        constructor%nodeIndices      = a_nodeIndices
-        constructor%nodeCoordinates  = a_nodeCoordinates
-        constructor%polynomialDegree = a_polynomialDegree
-    end function
+        this%elementNo        = a_elementNo
+        this%noNodes          = a_noNodes
+        this%nodeIndices      = a_nodeIndices
+        this%nodeCoordinates  = a_nodeCoordinates
+        this%polynomialDegree = a_polynomialDegree
+    end subroutine
+
+    subroutine element_interval_destructor(this)
+        class(element_interval) :: this
+
+        deallocate(this%nodeCoordinates)
+    end subroutine
 
     subroutine get_elementQuadrature(this, a_coordinates, a_weights)
         class(element_interval), intent(inout) :: this

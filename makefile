@@ -1,37 +1,43 @@
-BUILD_DIR ?= ./build
-SRC_DIRS ?= ./src
-TEST_DIRS ?= ./tests
+BIN_DIR  ?= ./bin
+LIB_DIR  ?= ./lib
+SRC_DIR  ?= ./src
+TEST_DIR ?= ./tests
 TEST_FILE ?= test
 
-TARGET_EXEC ?= $(TEST_FILE).out
-
-SRCS := $(wildcard $(SRC_DIRS)/*.f90 -or -wholename $(TEST_DIRS)/$(TEST_FILE).f90)
-OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
+include makefile.sources
+OBJS := $(SRCS:%=$(BIN_DIR)/%.o)
 DEPS := $(OBJS:.o=.d)
 
-INC_DIRS := $(shell find $(SRC_DIRS) -type d)
+INC_DIRS := $(shell find $(SRC_DIR) -type d)
 INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
-FCFLAGS := $(INC_FLAGS)
-FC = gfortran
+FC     = gfortran
+FFLAGS = -fcheck=all -fbacktrace -Wall -g
 
-$(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
-	#$(MKDIR_P) $(dir $@)
-	$(FC) $(OBJS) -o $@ $(LDFLAGS)
+all:
+	(make -f makefile $(OBJS))
 
-$(BUILD_DIR)/%.f90.o: %.f90
-	$(MKDIR_P) $(dir $@)
-	$(FC) $(FCFLAGS) -J $(BUILD_DIR) -c $< -o $@
+lib:
+	(make -f makefile all)
+	(ar -r $(LIB_DIR)/libforkeyfem.a $(OBJS))
 
-$(BUILD_DIR)/%.mod: %.f90
-	$(MKDIR_P) $(dir $@)
-	$(FC) $(FCFLAGS) -c $< -o $@
+$(BIN_DIR)/%.out: $(TEST_DIR)/%.f90
+	(make -f makefile all)
+	#$(FC) $(FFLAGS) $< -I $(BIN_DIR) -o $@
+	$(FC) $(FFLAGS) $(OBJS) $< -I $(BIN_DIR) -o $@
+
+$(BIN_DIR)/%.f90.o: $(SRC_DIR)/%.f90
+	mkdir -p $(dir $@)
+	$(FC) $(FFLAGS) -J $(BIN_DIR) -c $< -o $@
+
+# $(INC_DIR)/%.mod: $(SRC_DIR)/%.f90
+# 	mkdir -p $(dir $@)
+# 	$(FC) $(FFLAGS) -c $< -o $@
 
 .PHONY: clean
 
-clean:
-	$(RM) -r $(BUILD_DIR)
-
--include $(DEPS)
-
-MKDIR_P ?= mkdir -p
+clean ::
+	$(RM) -r $(BIN_DIR)/*.mod   # Module files.
+	$(RM) -r $(BIN_DIR)/*.out   # Test files.
+	$(RM) -r $(BIN_DIR)/*.f90.o # Object files.
+	$(RM) -r $(LIB_DIR)/*.a     # Library files.
