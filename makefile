@@ -34,10 +34,10 @@ $(BIN_DIR)/%.f90.o: $(SRC_DIR)/%.f90
 # 	mkdir -p $(dir $@)
 # 	$(FC) $(FFLAGS) -c $< -o $@
 
-.PHONY: clean
-
 clean ::
 	$(RM) -r $(BIN_DIR)/*.mod   # Module files.
 	$(RM) -r $(BIN_DIR)/*.out   # Test files.
 	$(RM) -r $(BIN_DIR)/*.f90.o # Object files.
 	$(RM) -r $(LIB_DIR)/*.a     # Library files.
+
+.PHONY: clean

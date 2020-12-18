@@ -30,11 +30,14 @@ program test
 
     ! deallocate(nodeCoordinates)
 
-
-
     type(mesh) :: myMesh
 
-    call myMesh%constructor(1)
+    call myMesh%constructor(0)
+
+    ! print *, "Adam"
+    ! print *, myMesh%elements(2)%element_type%elementNo
+    ! print *, myMesh%elements(3)%element_type%nodeIndices(2)
+    ! print *, ""
 
     call myMesh%destructor()
 end program test
