@@ -1,5 +1,6 @@
 program test
     use common
+    use quadrature
     use class_element
     use class_element_interval
     use class_mesh
@@ -32,12 +33,15 @@ program test
 
     type(mesh) :: myMesh
 
-    call myMesh%constructor(0)
+    integer :: i
+    real(dp), parameter :: h = 0.25
 
-    ! print *, "Adam"
-    ! print *, myMesh%elements(2)%element_type%elementNo
-    ! print *, myMesh%elements(3)%element_type%nodeIndices(2)
-    ! print *, ""
+    call myMesh%constructor_ex(0)
+
+    print *, "Adam"
+    print *, myMesh%elements(2)%element_type%map_localToGlobal(0.0_dp)
+    print *, myMesh%elementConnectivity(:, :)
+    print *, ""
 
     call myMesh%destructor()
 end program test

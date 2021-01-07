@@ -9,68 +9,86 @@ module class_mesh
     public
 
     type mesh
-        integer :: noElements
+        integer                                   :: noElements
         class(element), dimension(:), allocatable :: elements
+        integer                                   :: problemDimension
+        integer, dimension(:, :), allocatable     :: elementConnectivity
+        real(dp), dimension(:), allocatable       :: nodeCoordinates
     contains
         ! Constructors.
         procedure :: constructor => mesh_constructor
+        procedure :: constructor_ex => mesh_constructor_ex
         ! Deconstructors.
         procedure :: destructor => mesh_deconstructor
     end type mesh
 
 contains
-    subroutine mesh_constructor(this, a_exampleNo)
+    subroutine mesh_constructor(this, a_problemDimension)
         class(mesh) :: this
-        integer    :: a_exampleNo
+        integer     :: a_problemDimension
 
-        integer                             :: noNodes
-        integer, dimension(2)               :: nodeIndices
-        real(dp), dimension(:), allocatable :: nodeCoordinates
-        integer                             :: polynomialDegree
+        ! Add more stuff!!!!!
+
+    end subroutine
+
+    subroutine mesh_constructor_ex(this, a_exampleNo)
+        class(mesh) :: this
+        integer     :: a_exampleNo
+
+        integer, dimension(2) :: nodeIndices
+        integer               :: polynomialDegree
 
         real(dp) :: domainLeft
         real(dp) :: domainRight
         real(dp) :: h
-        integer  :: noElements
 
-        integer        :: i
+        integer :: i, j
 
         !type(element_types), pointer :: temp
 
-        noNodes = 2
-        nodeIndices(1) = 1
-        nodeIndices(2) = 2
         polynomialDegree = 1
-
-        allocate(nodeCoordinates(2))
-        nodeCoordinates(1) = 0
-        nodeCoordinates(2) = 1
 
         ! Simple 1D interval with 4 equal-sized elements on [0, 1].
         if (a_exampleNo == 0) then
-            noElements  = 4
+            this%problemDimension = 1
+
+            this%noElements  = 4
             domainLeft  = 0
             domainRight = 1
-            h = (domainRight - domainLeft)/noElements
+            h = (domainRight - domainLeft)/this%noElements
 
-            allocate(this%elements(noElements))
+            ! Node coordinates.
+            allocate(this%nodeCoordinates(this%noElements+1))
+            this%nodeCoordinates(1) = domainLeft
+
+            ! Elements storage.
+            allocate(this%elements(this%noElements))
 
             do i = 1, size(this%elements)
                 allocate(element_interval :: this%elements(i)%element_type)
 
-                ! nodeIndices(1) = domainLeft + (i-1)*h
-                ! nodeIndices(2) = domainLeft + i*h
+                this%nodeCoordinates(i+1) = domainLeft + i*h
 
                 nodeIndices(1) = i
                 nodeIndices(2) = i+1
-                
 
                 call this%elements(i)%element_type%constructor(i, &
-                    noNodes, nodeIndices, nodeCoordinates, polynomialDegree)
+                    nodeIndices, this%nodeCoordinates, polynomialDegree)
+            end do
+
+            ! Element connectivity.
+            allocate(this%elementConnectivity(this%noElements, 2))
+
+            do i = 1, this%noElements
+                if (i-1 > 0) then
+                    this%elementConnectivity(i, 1) = i-1
+                end if
+
+                if (i+1 <= this%noElements) then
+                    this%elementConnectivity(i, 2) = i+1
+                end if
             end do
         end if
-
-        deallocate(nodeCoordinates)
     end subroutine
 
     subroutine mesh_deconstructor(this)
@@ -78,12 +96,16 @@ contains
 
         integer :: i
 
+        deallocate(this%elementConnectivity)
+
         do i = 1, size(this%elements)
             call this%elements(i)%element_type%destructor()
             deallocate(this%elements(i)%element_type)
         end do
 
         deallocate(this%elements)
+
+        deallocate(this%nodeCoordinates)
     end subroutine
 
 end module class_mesh

@@ -26,21 +26,24 @@ module class_element
         ! Getters.
         procedure(interface_get_elementQuadrature), deferred :: get_elementQuadrature
         procedure(interface_get_Jacobian), deferred          :: get_Jacobian
+        procedure(interface_get_localCoordinates), deferred  :: get_localCoordinates
+        procedure(interface_get_globalCoordinates), deferred :: get_globalCoordinates
+
+        ! Maps.
+        procedure(interface_map_localToGlobal), deferred :: map_localToGlobal
 
         ! Misc methods.
         procedure(interface_basisLegendre), deferred    :: basisLegendre
         procedure(interface_basisLobatto), deferred     :: basisLobatto
-        procedure(interface_mapLocalToGlobal), deferred :: mapLocalToGlobal
     end type
 
     abstract interface
-        subroutine interface_constructor(this, a_elementNo, a_noNodes, a_nodeIndices, a_nodeCoordinates, a_polynomialDegree)
+        subroutine interface_constructor(this, a_elementNo, a_nodeIndices, a_nodeCoordinates, a_polynomialDegree)
             use common 
             import element_types
 
             class(element_types)                            :: this
             integer, intent(in)                             :: a_elementNo
-            integer, intent(in)                             :: a_noNodes
             integer, dimension(2), intent(in)               :: a_nodeIndices
             real(dp), dimension(:), allocatable, intent(in) :: a_nodeCoordinates
             integer, intent(in)                             :: a_polynomialDegree
@@ -62,8 +65,8 @@ module class_element
             import element_types
 
             class(element_types), intent(inout) :: this
-            real(dp), dimension(10)       :: a_coordinates
-            real(dp), dimension(10)       :: a_weights
+            real(dp), dimension(:), allocatable :: a_coordinates
+            real(dp), dimension(:), allocatable :: a_weights
         end subroutine
     end interface
 
@@ -73,7 +76,40 @@ module class_element
             import element_types
 
             class(element_types), intent(inout) :: this
-            real(dp)                      :: interface_get_Jacobian
+            real(dp)                            :: interface_get_Jacobian
+        end function
+    end interface
+
+    abstract interface
+        function interface_get_localCoordinates(this, a_coordinateNumber)
+            use common
+            import element_types
+
+            class(element_types), intent(inout) :: this
+            real(dp)                            :: interface_get_localCoordinates
+            integer                             :: a_coordinateNumber
+        end function
+    end interface
+
+    abstract interface
+        function interface_get_globalCoordinates(this, a_coordinateNumber)
+            use common
+            import element_types
+
+            class(element_types), intent(inout) :: this
+            real(dp)                            :: interface_get_globalCoordinates
+            integer                             :: a_coordinateNumber
+        end function
+    end interface
+
+    abstract interface
+        function interface_map_localToGlobal(this, a_xi)
+            use common
+            import element_types
+
+            class(element_types), intent(inout) :: this
+            real(dp)                            :: a_xi
+            real(dp)                            :: interface_map_localToGlobal
         end function
     end interface
 
@@ -100,17 +136,6 @@ module class_element
             integer                       :: a_deriv
             real(dp)                      :: a_point
             real(dp)                      :: BL
-        end function
-    end interface
-
-    abstract interface
-        function interface_mapLocalToGlobal(this, a_point)
-            use common
-            import element_types
-
-            class(element_types), intent(inout) :: this
-            real(dp)                      :: a_point
-            real(dp)                      :: interface_mapLocalToGlobal
         end function
     end interface
 
