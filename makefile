@@ -2,7 +2,7 @@ BIN_DIR  ?= ./bin
 LIB_DIR  ?= ./lib
 SRC_DIR  ?= ./src
 TEST_DIR ?= ./tests
-TEST_FILE ?= test
+#TEST_FILE ?= test
 
 include makefile.sources
 OBJS := $(SRCS:%=$(BIN_DIR)/%.o)

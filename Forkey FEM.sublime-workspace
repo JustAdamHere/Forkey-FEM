@@ -4,6 +4,42 @@
 		"selected_items":
 		[
 			[
+				"allo",
+				"allocatable"
+			],
+			[
+				"alloc",
+				"allocatable"
+			],
+			[
+				"matrix",
+				"matrix_sparse"
+			],
+			[
+				"inte",
+				"interface_entry"
+			],
+			[
+				"solt",
+				"solution_cg"
+			],
+			[
+				"sol",
+				"solution_cg"
+			],
+			[
+				"class_sol",
+				"class_solution_cg"
+			],
+			[
+				"class_",
+				"class_solution_cg"
+			],
+			[
+				"interface",
+				"interface_solution_constructor"
+			],
+			[
 				"element",
 				"elementConnectivity"
 			],
@@ -196,10 +232,28 @@
 	"buffers":
 	[
 		{
-			"file": "src/solution_cg.f90",
+			"file": "src/solvers_linear.f90",
 			"settings":
 			{
-				"buffer_size": 245,
+				"buffer_size": 5152,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/common.f90",
+			"settings":
+			{
+				"buffer_size": 2408,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "tests/test.f90",
+			"settings":
+			{
+				"buffer_size": 2439,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -394,22 +448,30 @@
 	[
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/bin",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/build",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/lib",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/tests"
 	],
 	"file_history":
 	[
+		"/D/testfile.dat",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/tests/matrix_test.f90",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/tests/test.f90",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/matrix_sparse.f90",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/matrix.f90",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/matrix_full.f90",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/element.f90",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/makefile",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/makefile.sources",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/solution_cg.f90",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/solution.f90",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/mesh.f90",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/element_interval.f90",
-		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/tests/test.f90",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/quadrature.f90",
-		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/element.f90",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/point.f90",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/AptoFEM/AptoFEM/source/makefile_serial",
-		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/makefile",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/README.md",
-		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/makefile.sources",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/makefile.old",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/makefile.objects",
 		"//wsl$/Ubuntu/home/adam/software/MUMPS/examples/README",
@@ -520,18 +582,11 @@
 		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/guestbook-update.php",
 		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/guestbook.php",
 		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/ipane-createhtml.php",
-		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/links-add.php",
-		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/links-createhtml.php",
-		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/links-update.php",
-		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/links.php",
-		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/news.php",
-		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/podcast.php",
-		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/article.php",
-		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson - Copy/htdocs/ensarticles.inc"
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/links-add.php"
 	],
 	"find":
 	{
-		"height": 24.0
+		"height": 22.0
 	},
 	"find_in_files":
 	{
@@ -545,6 +600,40 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"::",
+			"h",
+			"j",
+			"solution",
+			"vector",
+			"matrix",
+			"::",
+			"1",
+			"fulEntries",
+			"(n)",
+			"allocate",
+			"1",
+			"a_k",
+			"::",
+			"             ",
+			"            ",
+			"allocatable",
+			"dimension",
+			"=",
+			"%",
+			"matFul",
+			"deallocate",
+			"::",
+			"constructor",
+			"program test",
+			"entry",
+			"::",
+			"class_matrix_full",
+			"class_matrix",
+			"solvers_linear",
+			"module quadrature",
+			"function",
+			"r)",
+			"constructor",
 			"::",
 			"nodeCoordinates",
 			"n",
@@ -652,31 +741,98 @@
 			[
 				{
 					"buffer": 0,
-					"file": "src/solution_cg.f90",
+					"file": "src/solvers_linear.f90",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 245,
+						"buffer_size": 5152,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								209,
-								209
+								1844,
+								1844
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Fortran/grammars/FortranModern.sublime-syntax",
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 429.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 1,
+					"file": "src/common.f90",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2408,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1317,
+								1317
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Fortran/grammars/FortranModern.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 152.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "tests/test.f90",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2439,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2332,
+								2332
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Fortran/grammars/FortranModern.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 562.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -684,7 +840,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 24.0
+		"height": 22.0
 	},
 	"input":
 	{
@@ -699,11 +855,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.5,
 			1.0
 		],
 		"rows":
@@ -729,7 +892,7 @@
 	"project": "Forkey FEM.sublime-project",
 	"replace":
 	{
-		"height": 44.0
+		"height": 40.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -749,7 +912,7 @@
 		[
 			[
 				"",
-				"C:\\Users\\adam\\Blakey Cloud\\Documents\\Education\\University of Nottingham\\PhD\\AptoFEM\\AptoFEM.sublime-project"
+				"C:\\Users\\adam\\Blakey Cloud\\Documents\\Education\\University of Nottingham\\PhD\\Programming Tests\\PhD Blakey FEM\\PhD_BlakeyFEM\\PhD Blakey FEM.sublime-project"
 			]
 		],
 		"width": 380.0

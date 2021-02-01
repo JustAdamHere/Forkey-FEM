@@ -8,8 +8,12 @@ module class_solution
 
     public
 
-    type solution
-
+    type, abstract :: solution
+        type(mesh), pointer                 :: mesh
+        real(dp), dimension(:), allocatable :: solution
+        integer, dimension(:), allocatable  :: higherDoFs
+    contains
+        
     end type
 
 contains

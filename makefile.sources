@@ -3,4 +3,10 @@ SRCS = common.f90 \
 	quadrature.f90 \
 	element.f90 \
 	element_interval.f90 \
-	mesh.f90
+	mesh.f90 \
+	matrix.f90 \
+	matrix_full.f90 \
+	matrix_sparse.f90 \
+	solvers_linear.f90 \
+	solution.f90 \
+	solution_cg.f90
