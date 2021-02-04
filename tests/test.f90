@@ -5,6 +5,8 @@ program test
     use class_element_interval
     use class_mesh
     use solvers_linear
+    use class_solution
+    use class_solution_cg
 
     implicit none
 
@@ -34,20 +36,20 @@ program test
 
 
 
+    ! type(mesh)        :: myMesh
+    ! type(solution_cg) :: mySolution
 
-
-    ! type(mesh) :: myMesh
-
-    ! integer :: i
-    ! real(dp), parameter :: h = 0.25
+    ! real(dp) :: epsilon
 
     ! call myMesh%constructor_ex(0)
+    ! call mySolution%constructor(myMesh, f, epsilon, c)
 
     ! print *, "Adam"
     ! print *, myMesh%elements(2)%element_type%map_localToGlobal(0.0_dp)
     ! print *, myMesh%elementConnectivity(:, :)
     ! print *, ""
 
+    ! call mySolution%destructor()
     ! call myMesh%destructor()
 
 
@@ -55,12 +57,12 @@ program test
     ! |==========================================================
     ! |                       EXAMPLE                           |
     ! |==========================================================
-    ! 
+    
     !     5  0  3  2
     !     0  3  0  1
     !     0  0  0  2
     !    -1  1  0  1
-    !
+    
     ! |=========================================================|
 
     real(dp), dimension(:, :), allocatable :: myMatrix
@@ -81,6 +83,7 @@ program test
     myMatrix(2, 2) = 3
     myMatrix(2, 4) = 1
     myMatrix(3, 1) = 3
+    myMatrix(3, 3) = 0
     myMatrix(4, 1) = 2
     myMatrix(4, 2) = 1
     myMatrix(4, 3) = 2
@@ -94,10 +97,36 @@ program test
     mySolution = 0
 
     !call GaussJordan(myMatrix, myVector, mySolution)
-    call GMRES(myMatrix, myVector, mySolution, 200, 1e-15_dp)
+    !call GMRES(myMatrix, myVector, mySolution, 200, 1e-15_dp)
+    call direct(myMatrix, myVector, mySolution)
+
+    print *, myMatrix
+    print *, mySolution
+
+    print *, matmul(myMatrix, mySolution)
 
     deallocate(mySolution)
     deallocate(myVector)
     deallocate(myMatrix)
+
+contains
+
+    function f(x)
+        use common
+
+        real(dp) :: x
+        real(dp) :: f
+        
+        f = x
+    end function
+
+    function c(x)
+        use common
+
+        real(dp) :: x
+        real(dp) :: c
+        
+        c = x
+    end function
 
 end program test

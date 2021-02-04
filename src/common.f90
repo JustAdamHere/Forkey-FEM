@@ -36,7 +36,7 @@ contains
         norm = sqrt(norm)
     end function
 
-    subroutine Arnoldi(a_A, a_Q, a_k, a_m, h, q)
+    subroutine ArnoldiOLD(a_A, a_Q, a_k, a_m, h, q)
         real(dp), dimension(:, :)  :: a_A
         real(dp), dimension(:, :)  :: a_Q
         integer                    :: a_k
@@ -53,6 +53,23 @@ contains
         end do
         h(a_k+1) = norm(q)
         q        = q / h(a_k+1)
+    end subroutine
+
+    ! Taken from page 37:
+    !  Tim Kelley,
+    !  Iterative Methods for Linear and Nonlinear Equations,
+    !  SIAM, 2004,
+    !  ISBN: 0898713528,
+    !  LC: QA297.8.K45.
+    subroutine Arnoldi(A, b, x0, k, V)
+        ! Input variables.
+        real(dp), dimension(:, :), allocatable :: A
+        real(dp), dimension(:),    allocatable :: b
+        real(dp), dimension(:),    allocatable :: x0
+        integer                                :: k
+        real(dp), dimension(:),    allocatable :: V
+
+       
     end subroutine
 
     subroutine applyGivensRotation(a_h, a_cs, a_sn, a_k, a_m)

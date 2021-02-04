@@ -10,11 +10,12 @@ module class_solution_cg
     public
 
     type, extends(solution) :: solution_cg
-        procedure(double_double), pointer, nopass :: f
-        procedure(double_double), pointer, nopass :: c
+        procedure(double_double), pointer, nopass :: f => null()
+        procedure(double_double), pointer, nopass :: c => null()
     contains
         ! Constructors.
         procedure :: constructor
+        procedure :: destructor
 
         ! Solvers.
         procedure :: solve
@@ -34,7 +35,17 @@ module class_solution_cg
     end interface
 
 contains
-    subroutine constructor(this)
+    subroutine constructor(this, a_mesh, a_f, a_epsilon, a_c)
+        class(solution_cg)       :: this
+        class(mesh)              :: a_mesh
+        procedure(double_double) :: a_f
+        real(dp)                 :: a_epsilon
+        procedure(double_double) :: a_c
+
+        this%f => a_f
+    end subroutine
+
+    subroutine destructor(this)
         class(solution_cg) :: this
     end subroutine
 
