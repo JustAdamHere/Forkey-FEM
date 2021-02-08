@@ -36,21 +36,23 @@ program test
 
 
 
-    ! type(mesh)        :: myMesh
-    ! type(solution_cg) :: mySolution
+    type(mesh)        :: myMesh
+    type(solution_cg) :: mySolution
 
-    ! real(dp) :: epsilon
+    real(dp) :: epsilon
 
-    ! call myMesh%constructor_ex(0)
-    ! call mySolution%constructor(myMesh, f, epsilon, c)
+    call myMesh%constructor_ex(0)
+    call mySolution%constructor(myMesh, f, epsilon, c)
 
     ! print *, "Adam"
     ! print *, myMesh%elements(2)%element_type%map_localToGlobal(0.0_dp)
     ! print *, myMesh%elementConnectivity(:, :)
     ! print *, ""
 
-    ! call mySolution%destructor()
-    ! call myMesh%destructor()
+    call mySolution%solve()
+
+    call mySolution%destructor()
+    call myMesh%destructor()
 
 
 
@@ -65,49 +67,49 @@ program test
     
     ! |=========================================================|
 
-    real(dp), dimension(:, :), allocatable :: myMatrix
-    real(dp), dimension(:), allocatable    :: myVector
-    real(dp), dimension(:), allocatable    :: mySolution
+    ! real(dp), dimension(:, :), allocatable :: myMatrix
+    ! real(dp), dimension(:), allocatable    :: myVector
+    ! real(dp), dimension(:), allocatable    :: mySolution
 
-    integer n
+    ! integer n
 
-    n = 4
+    ! n = 4
 
-    allocate(myMatrix(n, n))
-    allocate(myVector(n))
-    allocate(mySolution(n))
+    ! allocate(myMatrix(n, n))
+    ! allocate(myVector(n))
+    ! allocate(mySolution(n))
 
-    myMatrix       = 0
-    myMatrix(1, 1) = 5
-    myMatrix(1, 4) = -1
-    myMatrix(2, 2) = 3
-    myMatrix(2, 4) = 1
-    myMatrix(3, 1) = 3
-    myMatrix(3, 3) = 0
-    myMatrix(4, 1) = 2
-    myMatrix(4, 2) = 1
-    myMatrix(4, 3) = 2
-    myMatrix(4, 4) = 1
+    ! myMatrix       = 0
+    ! myMatrix(1, 1) = 5
+    ! myMatrix(1, 4) = -1
+    ! myMatrix(2, 2) = 3
+    ! myMatrix(2, 4) = 1
+    ! myMatrix(3, 1) = 3
+    ! myMatrix(3, 3) = 0
+    ! myMatrix(4, 1) = 2
+    ! myMatrix(4, 2) = 1
+    ! myMatrix(4, 3) = 2
+    ! myMatrix(4, 4) = 1
 
-    myVector(1) = 1
-    myVector(2) = 2
-    myVector(3) = 3
-    myVector(4) = 4
+    ! myVector(1) = 1
+    ! myVector(2) = 2
+    ! myVector(3) = 3
+    ! myVector(4) = 4
 
-    mySolution = 0
+    ! mySolution = 0
 
-    !call GaussJordan(myMatrix, myVector, mySolution)
-    !call GMRES(myMatrix, myVector, mySolution, 200, 1e-15_dp)
-    call direct(myMatrix, myVector, mySolution)
+    ! !call GaussJordan(myMatrix, myVector, mySolution)
+    ! !call GMRES(myMatrix, myVector, mySolution, 200, 1e-15_dp)
+    ! call direct(myMatrix, myVector, mySolution)
 
-    print *, myMatrix
-    print *, mySolution
+    ! print *, myMatrix
+    ! print *, mySolution
 
-    print *, matmul(myMatrix, mySolution)
+    ! print *, matmul(myMatrix, mySolution)
 
-    deallocate(mySolution)
-    deallocate(myVector)
-    deallocate(myMatrix)
+    ! deallocate(mySolution)
+    ! deallocate(myVector)
+    ! deallocate(myMatrix)
 
 contains
 

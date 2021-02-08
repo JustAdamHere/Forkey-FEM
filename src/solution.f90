@@ -11,7 +11,8 @@ module class_solution
     type, abstract :: solution
         type(mesh), pointer                 :: mesh
         real(dp), dimension(:), allocatable :: solution
-        integer, dimension(:), allocatable  :: higherDoFs
+        integer                             :: DoFs
+        integer, dimension(:), allocatable  :: startDoFs
     contains
         
     end type

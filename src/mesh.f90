@@ -18,6 +18,7 @@ module class_mesh
         ! Constructors.
         procedure :: constructor => mesh_constructor
         procedure :: constructor_ex => mesh_constructor_ex
+
         ! Deconstructors.
         procedure :: destructor => mesh_deconstructor
     end type mesh
@@ -26,9 +27,6 @@ contains
     subroutine mesh_constructor(this, a_problemDimension)
         class(mesh) :: this
         integer     :: a_problemDimension
-
-        ! Add more stuff!!!!!
-
     end subroutine
 
     subroutine mesh_constructor_ex(this, a_exampleNo)
