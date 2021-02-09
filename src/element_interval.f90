@@ -29,6 +29,8 @@ module class_element_interval
         ! Misc methods.
         procedure :: basisLegendre
         procedure :: basisLobatto
+        procedure :: evaluateBasisLegendre
+        procedure :: evaluateBasisLobatto
     end type element_interval
 
 contains
@@ -160,4 +162,36 @@ contains
             BL = 0
         end if
     end function
+
+    subroutine evaluateBasisLegendre(this, a_basisPoints, a_degree, a_deriv, a_points)
+        class(element_interval)             :: this
+        real(dp), dimension(:), allocatable :: a_basisPoints
+        integer                             :: a_degree
+        integer                             :: a_deriv
+        real(dp), dimension(:), allocatable :: a_points
+
+        integer :: i, n
+
+        n = size(a_points, 1)
+
+        do i = 1, n
+            a_basisPoints(i) = basisLegendre(this, a_degree, a_deriv, a_points(i))
+        end do
+    end subroutine
+
+    subroutine evaluateBasisLobatto(this, a_basisPoints, a_degree, a_deriv, a_points)
+        class(element_interval)             :: this
+        real(dp), dimension(:), allocatable :: a_basisPoints
+        integer                             :: a_degree
+        integer                             :: a_deriv
+        real(dp), dimension(:), allocatable :: a_points
+
+        integer :: i, n
+
+        n = size(a_points, 1)
+
+        do i = 1, n
+            a_basisPoints(i) = basisLobatto(this, a_degree, a_deriv, a_points(i))
+        end do
+    end subroutine
 end module class_element_interval

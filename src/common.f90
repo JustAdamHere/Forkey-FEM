@@ -4,6 +4,16 @@ module common
     integer, parameter :: dp = selected_real_kind(15)
     integer, parameter :: pi = 4.0_dp * atan(1.0_dp)
 
+    interface
+        function interface_basis(a_degree, a_deriv, a_point)
+            import dp
+
+            integer                                :: a_degree
+            integer                                :: a_deriv
+            real(dp)                               :: a_point
+        end function
+    end interface
+
 contains
     function appendToArray(a_array, a_value)
         real(dp), dimension(:), allocatable :: a_array
@@ -107,5 +117,15 @@ contains
         t  = sqrt(a_v1**2 + a_v2**2)
         cs = a_v1/t
         sn = a_v2/t
+    end subroutine
+
+    subroutine evaluateBasis(a_basisPoints, a_basis, a_degree, a_deriv, a_points)
+        real(dp), dimension(:), allocatable :: a_basisPoints
+        procedure(interface_basis), pointer :: a_basis
+        integer                             :: a_degree
+        integer                             :: a_deriv
+        real(dp), dimension(:), allocatable :: a_points
+
+        allocate(a_basisPoints(size(a_points, 1)))
     end subroutine
 end module common

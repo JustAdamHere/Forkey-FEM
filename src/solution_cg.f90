@@ -29,8 +29,6 @@ module class_solution_cg
         ! Internal methods.
         procedure :: a
         procedure :: l
-
-        procedure :: testadam
     end type
 
     interface
@@ -42,11 +40,19 @@ module class_solution_cg
         end function
     end interface
 
-contains
-    subroutine testadam(this)
-        class(solution_cg) :: this
-    end subroutine
+    ! interface
+    !     function interface_basis(this, a_degree, a_deriv, a_point)
+    !         use common
+    !         use class_element
 
+    !         class(element)                   :: this
+    !         integer                                :: a_degree
+    !         integer                                :: a_deriv
+    !         real(dp)                               :: a_point
+    !     end function
+    ! end interface
+
+contains
     subroutine constructor(this, a_mesh, a_f, a_epsilon, a_c)
         class(solution_cg)       :: this
         class(mesh)              :: a_mesh
@@ -61,15 +67,11 @@ contains
         this%epsilon      =  a_epsilon
         this%c            => a_c
 
-        call this%testadam()
-        !call this%calculate_DoFs()
-
-        this%DoFs = 4
-
-        n = this%DoFs
-        allocate(this%startDoFs(n))
+        n = 5
 
         allocate(this%u(n))
+
+        call calculate_DoFs(this)
     end subroutine
 
     subroutine destructor(this)
@@ -85,9 +87,15 @@ contains
         integer                                :: n, m
         real(dp), dimension(:, :), allocatable :: stiffnessMatrix 
         real(dp), dimension(:), allocatable    :: loadVector
+        integer                                :: a, b
         integer                                :: i, j, k
         type(element)                          :: currentElement
         integer                                :: p
+        integer                                :: startDoF, endDoF
+        procedure(interface_basis), pointer    :: basisType1
+        procedure(interface_basis), pointer    :: basisType2
+        real(dp), dimension(:), allocatable    :: basis, basis1, basis2, basis1_, basis2_
+        real(dp), dimension(:), allocatable    :: quadPoints, quadWeights
 
         n = this%DoFs
         m = this%solutionMesh%noElements
@@ -102,7 +110,39 @@ contains
             currentElement = this%solutionMesh%elements(k)
             p              = currentElement%element_type%polynomialDegree
 
-            
+            call currentElement%element_type%get_elementQuadrature(quadPoints, quadWeights)
+
+            startDoF = this%startDoFs(k)
+            endDoF   = this%startDoFs(k+1)
+            do b = 0, endDoF-startDoF-1
+                j     = startDoF + b
+                !basisType2 => currentElement%element_type%basisLobatto
+
+                call evaluateBasis(basis, basisType2, b, 0, quadPoints) ! <-- Write this into a routine in element.
+
+                !loadVector(j) = loadVector(j) + this%l(currentElement, basis)
+
+                do a = 0, endDoF-startDoF-1
+                    i = startDoF + a
+                    !basisType1 => currentElement%element_type%basisLobatto
+
+                    call evaluateBasis(basis1,  basisType1, a, 0, quadPoints)
+                    call evaluateBasis(basis2,  basisType2, b, 0, quadPoints)
+                    call evaluateBasis(basis1_, basisType1, a, 1, quadPoints)
+                    call evaluateBasis(basis2_, basisType2, b, 1, quadPoints)
+
+
+                    deallocate(basis2_)
+                    deallocate(basis1_)
+                    deallocate(basis2)
+                    deallocate(basis1)
+                end do
+
+                deallocate(basis)
+            end do
+
+            deallocate(quadPoints)
+            deallocate(quadWeights)
         end do
 
 
@@ -113,13 +153,19 @@ contains
     subroutine calculate_DoFs(this)
         class(solution_cg) :: this
 
-        integer :: m
+        integer :: i, m, p
 
-        !m = this%solutionMesh%noElements
+        m = this%solutionMesh%noElements
 
-        !allocate(this%startDoFs(m+1))
+        allocate(this%startDoFs(m+1))
 
-        !this%DoFs = 10
+        this%startDoFs(1) = 1
+        do i = 2, m+1
+            p = this%solutionMesh%elements(i-1)%element_type%polynomialDegree
+            this%startDoFs(i) = this%startDoFs(i-1) + 2 + (p-1)
+        end do
+
+        this%DoFs = this%startDoFs(m+1)-1
     end subroutine
 
     function a(this, currentElement, basis1, basis2, basis1_, basis2_)

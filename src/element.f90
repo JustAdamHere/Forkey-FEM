@@ -33,8 +33,10 @@ module class_element
         procedure(interface_map_localToGlobal), deferred :: map_localToGlobal
 
         ! Misc methods.
-        procedure(interface_basisLegendre), deferred    :: basisLegendre
-        procedure(interface_basisLobatto), deferred     :: basisLobatto
+        procedure(interface_basisLegendre), deferred         :: basisLegendre
+        procedure(interface_basisLobatto), deferred          :: basisLobatto
+        procedure(interface_evaluateBasisLegendre), deferred :: evaluateBasisLegendre
+        procedure(interface_evaluateBasisLobatto), deferred  :: evaluateBasisLobatto
     end type
 
     abstract interface
@@ -137,6 +139,32 @@ module class_element
             real(dp)                      :: a_point
             real(dp)                      :: BL
         end function
+    end interface
+
+    abstract interface
+        subroutine interface_evaluateBasisLegendre(this, a_basisPoints, a_degree, a_deriv, a_points)
+            use common
+            import element_types
+
+            class(element_types)                :: this
+            real(dp), dimension(:), allocatable :: a_basisPoints
+            integer                             :: a_degree
+            integer                             :: a_deriv
+            real(dp), dimension(:), allocatable :: a_points
+        end subroutine
+    end interface
+
+    abstract interface
+        subroutine interface_evaluateBasisLobatto(this, a_basisPoints, a_degree, a_deriv, a_points)
+            use common
+            import element_types
+
+            class(element_types)                :: this
+            real(dp), dimension(:), allocatable :: a_basisPoints
+            integer                             :: a_degree
+            integer                             :: a_deriv
+            real(dp), dimension(:), allocatable :: a_points
+        end subroutine
     end interface
 
 contains
