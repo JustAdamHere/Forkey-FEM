@@ -63,7 +63,8 @@ contains
         integer :: n
         integer :: i
 
-        n = ceiling(real(2*this%polynomialDegree + 1, dp)/2) + 1
+        !n = ceiling(real(2*this%polynomialDegree + 1, dp)/2) + 1
+        n = 3
 
         allocate(a_coordinates(n))
         allocate(a_weights    (n))
@@ -137,18 +138,18 @@ contains
         real(dp)                               :: temp2
 
         if (-1 <= a_point .and. a_point <= 1) then
-            if (a_degree == 0) then
-                if (a_deriv == 0) then
+            if (a_deriv == 0) then
+                if (a_degree == 0) then
                     BL = (1-a_point)/2
-                else if (a_deriv == 1) then
+                else if (a_degree == 1) then
                     BL = (1+a_point)/2
                 else
-                    BL = 0
+                    BL = 0   ! <-- Should this be zero?!
                 end if
-            else if (a_degree == 1) then
-                if (a_deriv == 0) then
+            else if (a_deriv == 1) then
+                if (a_degree == 0) then
                     BL = -0.5
-                else if (a_deriv == 1) then
+                else if (a_degree == 1) then
                     BL = 0.5
                 else
                     BL = 0
@@ -174,6 +175,8 @@ contains
 
         n = size(a_points, 1)
 
+        allocate(a_basisPoints(n))
+
         do i = 1, n
             a_basisPoints(i) = basisLegendre(this, a_degree, a_deriv, a_points(i))
         end do
@@ -189,6 +192,8 @@ contains
         integer :: i, n
 
         n = size(a_points, 1)
+
+        allocate(a_basisPoints(n))
 
         do i = 1, n
             a_basisPoints(i) = basisLobatto(this, a_degree, a_deriv, a_points(i))

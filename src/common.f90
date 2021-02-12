@@ -14,6 +14,15 @@ module common
         end function
     end interface
 
+    interface
+        function double_double(x)
+            import dp
+
+            real(dp) :: x
+            real(dp) :: double_double
+        end function
+    end interface
+
 contains
     function appendToArray(a_array, a_value)
         real(dp), dimension(:), allocatable :: a_array
@@ -128,4 +137,29 @@ contains
 
         allocate(a_basisPoints(size(a_points, 1)))
     end subroutine
+
+    function func_sin(x)
+        real(dp) :: func_sin
+        real(dp) :: x
+
+        func_sin = sin(x)
+    end function
+
+    function func_one(x)
+        real(dp) :: func_one
+        real(dp) :: x
+
+        func_one = 1
+    end function
+
+    function func_boundaryem4(x)
+        real(dp) :: func_boundaryem4
+        real(dp) :: x
+
+        real(dp) :: a
+
+        a = 1e-3
+
+        func_boundaryem4 = 1
+    end function
 end module common

@@ -1,8 +1,8 @@
 module solvers_linear
     use common
-    use class_matrix
-    use class_matrix_full
-    use class_matrix_sparse
+    ! use class_matrix
+    ! use class_matrix_full
+    ! use class_matrix_sparse
 
     implicit none
 

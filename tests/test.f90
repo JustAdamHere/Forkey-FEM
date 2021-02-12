@@ -39,17 +39,23 @@ program test
     type(mesh)        :: myMesh
     type(solution_cg) :: mySolution
 
-    real(dp) :: epsilon
-
     call myMesh%constructor_ex(0)
-    call mySolution%constructor(myMesh, f, epsilon, c)
+    call mySolution%constructor(myMesh, func_one, 0.0001_dp, func_one, func_boundaryem4)
 
     ! print *, "Adam"
     ! print *, myMesh%elements(2)%element_type%map_localToGlobal(0.0_dp)
     ! print *, myMesh%elementConnectivity(:, :)
     ! print *, ""
 
+    !print *, "Adam"
+    !print *, mySolution%f(1.0_dp)
+
+    ! print *, "Adam"
+    ! print *, myMesh%elements(1)%element_type%basisLobatto(1, 1, 0.5_dp)
+
     call mySolution%solve()
+
+    call mySolution%output_solution()
 
     call mySolution%destructor()
     call myMesh%destructor()
@@ -112,23 +118,5 @@ program test
     ! deallocate(myMatrix)
 
 contains
-
-    function f(x)
-        use common
-
-        real(dp) :: x
-        real(dp) :: f
-        
-        f = x
-    end function
-
-    function c(x)
-        use common
-
-        real(dp) :: x
-        real(dp) :: c
-        
-        c = x
-    end function
 
 end program test
