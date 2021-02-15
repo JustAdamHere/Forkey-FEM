@@ -18,6 +18,7 @@ module class_mesh
         ! Constructors.
         procedure :: constructor => mesh_constructor
         procedure :: constructor_ex => mesh_constructor_ex
+        procedure :: constructor_eq => mesh_constructor_eq
 
         ! Deconstructors.
         procedure :: destructor => mesh_deconstructor
@@ -87,6 +88,63 @@ contains
                 end if
             end do
         end if
+    end subroutine
+
+    subroutine mesh_constructor_eq(this, a_noElements)
+        class(mesh) :: this
+        integer     :: a_noElements
+
+        integer, dimension(2) :: nodeIndices
+        integer               :: polynomialDegree
+
+        real(dp) :: domainLeft
+        real(dp) :: domainRight
+        real(dp) :: h
+
+        integer :: i, j
+
+        !type(element_types), pointer :: temp
+
+        polynomialDegree = 1
+
+        this%problemDimension = 1
+
+        this%noElements  = a_noElements
+        domainLeft  = 0
+        domainRight = 1
+        h = (domainRight - domainLeft)/this%noElements
+
+        ! Node coordinates.
+        allocate(this%nodeCoordinates(this%noElements+1))
+        this%nodeCoordinates(1) = domainLeft
+
+        ! Elements storage.
+        allocate(this%elements(this%noElements))
+
+        do i = 1, size(this%elements)
+            allocate(element_interval :: this%elements(i)%element_type)
+
+            this%nodeCoordinates(i+1) = domainLeft + i*h
+
+            nodeIndices(1) = i
+            nodeIndices(2) = i+1
+
+            call this%elements(i)%element_type%constructor(i, &
+                nodeIndices, this%nodeCoordinates, polynomialDegree)
+        end do
+
+        ! Element connectivity.
+        allocate(this%elementConnectivity(this%noElements, 2))
+
+        do i = 1, this%noElements
+            if (i-1 > 0) then
+                this%elementConnectivity(i, 1) = i-1
+            end if
+
+            if (i+1 <= this%noElements) then
+                this%elementConnectivity(i, 2) = i+1
+            end if
+        end do
     end subroutine
 
     subroutine mesh_deconstructor(this)

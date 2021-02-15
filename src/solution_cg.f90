@@ -300,11 +300,11 @@ contains
     end function
 
     function compute_uh_single(this, a_elementNo, a_deriv, a_xi)
-        class(solution) :: this
-        real(dp)        :: compute_uh_single
-        integer         :: a_elementNo
-        integer         :: a_deriv
-        real(dp)        :: a_xi
+        class(solution_cg) :: this
+        real(dp)           :: compute_uh_single
+        integer            :: a_elementNo
+        integer            :: a_deriv
+        real(dp)           :: a_xi
 
         real(dp), dimension(:), allocatable :: xi
         class(element), pointer             :: currentElement
@@ -340,7 +340,7 @@ contains
     end function
 
     function compute_uh(this, a_elementNo, a_deriv, a_xi)
-        class(solution)                     :: this
+        class(solution_cg)                  :: this
         real(dp), dimension(:), allocatable :: compute_uh
         integer                             :: a_elementNo
         integer                             :: a_deriv
@@ -378,7 +378,7 @@ contains
     end function
 
      subroutine output_solution(this)
-        class(solution) :: this
+        class(solution_cg) :: this
 
         integer           :: fileNo
         character(len=32) :: fileName

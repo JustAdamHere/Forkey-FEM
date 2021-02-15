@@ -10,7 +10,7 @@ points, approximate = np.loadtxt("../data/solution.dat", unpack=True)
 plt.figure(1)
 
 plt.plot(points, approximate, 'b-', label="Approximation")
-plt.plot(points, exact,       'g-', label="Exact")
+#plt.plot(points, exact,       'g-', label="Exact")
 plt.grid(True)
 plt.xlabel("x")
 plt.ylabel("u")
