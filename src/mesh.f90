@@ -90,12 +90,12 @@ contains
         end if
     end subroutine
 
-    subroutine mesh_constructor_eq(this, a_noElements)
+    subroutine mesh_constructor_eq(this, a_noElements, a_polynomialDegree)
         class(mesh) :: this
         integer     :: a_noElements
+        integer     :: a_polynomialDegree
 
         integer, dimension(2) :: nodeIndices
-        integer               :: polynomialDegree
 
         real(dp) :: domainLeft
         real(dp) :: domainRight
@@ -104,8 +104,6 @@ contains
         integer :: i, j
 
         !type(element_types), pointer :: temp
-
-        polynomialDegree = 1
 
         this%problemDimension = 1
 
@@ -130,7 +128,7 @@ contains
             nodeIndices(2) = i+1
 
             call this%elements(i)%element_type%constructor(i, &
-                nodeIndices, this%nodeCoordinates, polynomialDegree)
+                nodeIndices, this%nodeCoordinates, a_polynomialDegree)
         end do
 
         ! Element connectivity.

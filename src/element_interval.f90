@@ -22,6 +22,7 @@ module class_element_interval
         procedure :: get_Jacobian
         procedure :: get_localCoordinates
         procedure :: get_globalCoordinates
+        procedure :: get_typeName
 
         ! Maps.
         procedure :: map_localToGlobal
@@ -106,6 +107,13 @@ contains
         get_globalCoordinates = this%nodeCoordinates(index)
     end function
 
+    function get_typeName(this)
+        class(element_interval), intent(inout) :: this
+        character(len=32)                      :: get_typeName
+
+        get_typeName = 'element_interval'
+    end function
+
     function map_localToGlobal(this, a_xi)
         class(element_interval), intent(inout) :: this
         real(dp)                               :: a_xi
@@ -138,21 +146,17 @@ contains
         real(dp)                               :: temp2
 
         if (-1 <= a_point .and. a_point <= 1) then
-            if (a_deriv == 0) then
+            if (a_deriv == 0 .and. a_degree <= 1) then
                 if (a_degree == 0) then
                     BL = (1-a_point)/2
                 else if (a_degree == 1) then
                     BL = (1+a_point)/2
-                else
-                    BL = 0   ! <-- Should this be zero?!
                 end if
-            else if (a_deriv == 1) then
+            else if (a_deriv == 1 .and. a_degree <= 1) then
                 if (a_degree == 0) then
                     BL = -0.5
                 else if (a_degree == 1) then
                     BL = 0.5
-                else
-                    BL = 0
                 end if
             else
                 temp1 = this%basisLegendre(a_degree,   a_deriv, a_point)

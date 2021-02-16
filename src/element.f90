@@ -28,6 +28,7 @@ module class_element
         procedure(interface_get_Jacobian), deferred          :: get_Jacobian
         procedure(interface_get_localCoordinates), deferred  :: get_localCoordinates
         procedure(interface_get_globalCoordinates), deferred :: get_globalCoordinates
+        procedure(interface_get_typeName), deferred          :: get_typeName
 
         ! Maps.
         procedure(interface_map_localToGlobal), deferred :: map_localToGlobal
@@ -101,6 +102,16 @@ module class_element
             class(element_types), intent(inout) :: this
             real(dp)                            :: interface_get_globalCoordinates
             integer                             :: a_coordinateNumber
+        end function
+    end interface
+
+    abstract interface
+        function interface_get_typeName(this)
+            use common
+            import element_types
+
+            class(element_types), intent(inout) :: this
+            character(len=32)                   :: interface_get_typeName
         end function
     end interface
 

@@ -12,11 +12,11 @@ module class_solution
         type(mesh), pointer                 :: solutionMesh => null()
         real(dp), dimension(:), allocatable :: uh
         integer                             :: DoFs
-        integer, dimension(:), allocatable  :: startDoFs
     contains
         procedure(interface_compute_uh), deferred        :: compute_uh
         procedure(interface_compute_uh_single), deferred :: compute_uh_single
         procedure(interface_output_solution), deferred   :: output_solution
+        procedure(interface_get_typeName), deferred      :: get_typeName
     end type
 
     abstract interface
@@ -51,6 +51,15 @@ module class_solution
 
             class(solution) :: this
         end subroutine
+    end interface
+
+    abstract interface
+        function interface_get_typeName(this)
+            import solution
+
+            class(solution)   :: this
+            character(len=32) :: interface_get_typeName
+        end function
     end interface
 
 contains

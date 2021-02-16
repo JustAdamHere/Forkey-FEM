@@ -15,6 +15,7 @@ module class_solution_cg
         real(dp)                                  :: epsilon
         procedure(double_double), pointer, nopass :: c => null()
         !type(mesh), pointer                       :: solutionMesh => null()
+        integer, dimension(:), allocatable        :: startHigherDoFs
     contains
         ! Constructors.
         procedure :: constructor
@@ -25,6 +26,10 @@ module class_solution_cg
 
         ! Calculators.
         procedure :: calculate_DoFs
+        procedure :: calculate_elementDoFs
+
+        ! Getters.
+        procedure :: get_typeName => solution_get_typeName
 
         ! Internal methods.
         procedure :: a
@@ -87,7 +92,7 @@ contains
     subroutine destructor(this)
         class(solution_cg) :: this
 
-        deallocate(this%startDoFs)
+        deallocate(this%startHigherDoFs)
         deallocate(this%uh)
     end subroutine
 
@@ -105,6 +110,8 @@ contains
         real(dp), dimension(:), allocatable    :: basis, basis1, basis2, basis1_, basis2_
         real(dp), dimension(:), allocatable    :: quadPoints, quadWeights
         real(dp), dimension(:), allocatable    :: loadVector_u0, u0
+        integer, dimension(:), allocatable     :: elementDoFs
+        integer                                :: elementHigherDoFsStart, elementHigherDoFsEnd
 
         n = this%DoFs
         m = this%solutionMesh%noElements
@@ -121,16 +128,16 @@ contains
 
             call currentElement%element_type%get_elementQuadrature(quadPoints, quadWeights)
 
-            startDoF = this%startDoFs(k)
-            endDoF   = this%startDoFs(k+1)
-            do j1 = 0, endDoF-startDoF
-                j     = startDoF + j1
+            call calculate_elementDoFs(this, k, elementDoFs)
+
+            do j1 = 0, p
+                j = elementDoFs(j1+1)
                 call currentElement%element_type%evaluateBasisLobatto(basis, j1, 0, quadPoints)
 
                 loadVector(j) = loadVector(j) + l(this, currentElement, basis)
 
-                do i1 = 0, endDoF-startDoF
-                    i = startDoF + i1
+                do i1 = 0, p
+                    i = elementDoFs(i1+1)
 
                     call currentElement%element_type%evaluateBasisLobatto(basis1,  i1, 0, quadPoints)
                     call currentElement%element_type%evaluateBasisLobatto(basis2,  j1, 0, quadPoints)
@@ -148,6 +155,8 @@ contains
                 deallocate(basis)
             end do
 
+            deallocate(elementDoFs)
+
             deallocate(quadPoints)
             deallocate(quadWeights)
         end do
@@ -162,7 +171,7 @@ contains
         stiffnessMatrix(m+1, :)   = 0
         stiffnessMatrix(:,   m+1) = 0
 
-        allocate(u0(m+1))
+        allocate(u0(n))
         u0 = 0
 
         allocate(loadVector_u0(m+1))
@@ -179,8 +188,8 @@ contains
 
 
 
-        ! do k = 1, m+1
-        !     do j = 1, m+1
+        ! do k = 1, n
+        !     do j = 1, n
         !         print *, stiffnessMatrix(k, j)
         !     end do
         ! end do
@@ -195,6 +204,27 @@ contains
 
         deallocate(loadVector)
         deallocate(stiffnessMatrix)
+    end subroutine
+
+    subroutine calculate_elementDoFs(this, a_k, a_elementDoFs)
+        class(solution_cg)                  :: this
+        integer                             :: a_k
+        integer, dimension(:), allocatable  :: a_elementDoFs
+        integer                             :: elementHigherDoFsStart, elementHigherDoFsEnd
+        integer                             :: j
+        integer                             :: p
+
+        p = this%solutionMesh%elements(a_k)%element_type%polynomialDegree
+
+        allocate(a_elementDoFs(p+1))
+        a_elementDoFs(1) = a_k
+        a_elementDoFs(2) = a_k+1
+
+        elementHigherDoFsStart = this%startHigherDoFs(a_k)
+        elementHigherDoFsEnd   = this%startHigherDoFs(a_k+1)
+        do j = 1, elementHigherDoFsEnd-elementHigherDoFsStart
+            a_elementDoFs(j+2) = elementHigherDoFsStart + j-1
+        end do
     end subroutine
 
     ! subroutine calculate_DoFs(this) ! Um, be careful of CG and DG?!??!
@@ -215,23 +245,49 @@ contains
     !     this%DoFs = this%startDoFs(m+1)-1
     ! end subroutine
 
-    subroutine calculate_DoFs(this)
+    ! subroutine calculate_DoFs(this)
+    !     class(solution_cg) :: this
+
+    !     integer :: i, m, p
+
+    !     m = this%solutionMesh%noElements
+
+    !     allocate(this%startDoFs(m+1))
+
+    !     this%startDoFs(1) = 1
+    !     do i = 2, m+1
+    !         p = this%solutionMesh%elements(i-1)%element_type%polynomialDegree
+    !         this%startDoFs(i) = this%startDoFs(i-1) + 1 + (p-1)
+    !     end do
+
+    !     this%DoFs = this%startDoFs(m+1)
+    ! end subroutine
+
+     subroutine calculate_DoFs(this)
         class(solution_cg) :: this
 
         integer :: i, m, p
 
         m = this%solutionMesh%noElements
 
-        allocate(this%startDoFs(m+1))
+        allocate(this%startHigherDoFs(m+1))
 
-        this%startDoFs(1) = 1
+        this%startHigherDoFs(1) = m+2
         do i = 2, m+1
             p = this%solutionMesh%elements(i-1)%element_type%polynomialDegree
-            this%startDoFs(i) = this%startDoFs(i-1) + 1 + (p-1)
+            ! this%startDoFs(i) = this%startDoFs(i-1) + 1 + (p-1)
+            this%startHigherDoFs(i) = this%startHigherDoFs(i-1) + (p-1)
         end do
 
-        this%DoFs = this%startDoFs(m+1)
+        this%DoFs = this%startHigherDoFs(m+1) - 1
     end subroutine
+
+    function solution_get_typeName(this)
+        class(solution_cg) :: this
+        character(len=32)  :: solution_get_typeName
+
+        solution_get_typeName = 'solution_cg'
+    end function
 
     function a(this, currentElement, basis1, basis2, basis1_, basis2_)
         class(solution_cg)                  :: this
@@ -312,20 +368,23 @@ contains
         integer                             :: startDoF, endDoF
         integer                             :: i, i1, j
         integer                             :: n
+        integer                             :: p
         real(dp), dimension(:), allocatable :: basis
+        integer, dimension(:), allocatable  :: elementDoFs
 
         currentElement => this%solutionMesh%elements(a_elementNo)
         Jacobian = currentElement%element_type%get_Jacobian()
+        p        = currentElement%element_type%polynomialDegree
 
         allocate(xi(1))
         xi(1) = a_xi
 
         compute_uh_single = 0
 
-        startDoF = this%startDoFs(a_elementNo)
-        endDoF   = this%startDoFs(a_elementNo+1)
-        do i1 = 0, endDoF-startDoF
-            i = startDoF + i1
+        call calculate_elementDoFs(this, a_elementNo, elementDoFs)
+
+        do i1 = 0, p
+            i = elementDoFs(i1+1)
             call currentElement%element_type%evaluateBasisLobatto(basis, i1, a_deriv, xi)
 
             compute_uh_single = compute_uh_single + this%uh(i)*basis(1)
@@ -333,6 +392,7 @@ contains
             deallocate(basis)
         end do
 
+        deallocate(elementDoFs)
         deallocate(xi)
 
         compute_uh_single = compute_uh_single / (Jacobian ** a_deriv)
@@ -351,19 +411,22 @@ contains
         integer                             :: startDoF, endDoF
         integer                             :: i, i1, j
         integer                             :: n
+        integer                             :: p
         real(dp), dimension(:), allocatable :: basis
+        integer, dimension(:), allocatable  :: elementDoFs
 
         currentElement => this%solutionMesh%elements(a_elementNo)
         Jacobian = currentElement%element_type%get_Jacobian()
+        p        = currentElement%element_type%polynomialDegree
 
         n = size(a_xi, 1)
         allocate(compute_uh(n))
         compute_uh = 0
 
-        startDoF = this%startDoFs(a_elementNo)
-        endDoF   = this%startDoFs(a_elementNo+1)
-        do i1 = 0, endDoF-startDoF
-            i = startDoF + i1
+        call calculate_elementDoFs(this, a_elementNo, elementDoFs)
+
+        do i1 = 0, p
+            i = elementDoFs(i1+1)
             call currentElement%element_type%evaluateBasisLobatto(basis, i1, a_deriv, a_xi)
 
             do j = 1, n
@@ -372,6 +435,8 @@ contains
 
             deallocate(basis)
         end do
+
+        deallocate(elementDoFs)
 
         compute_uh = compute_uh / (Jacobian ** a_deriv)
 
@@ -390,7 +455,7 @@ contains
 
         n = this%solutionMesh%noElements
 
-        noSamples = 10
+        noSamples = 20
         h = 2.0_dp/noSamples
 
         fileNo = 1
