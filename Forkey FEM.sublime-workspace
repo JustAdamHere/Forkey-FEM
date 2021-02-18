@@ -4,16 +4,24 @@
 		"selected_items":
 		[
 			[
+				"load",
+				"loadVector"
+			],
+			[
 				"elemen",
-				"elementHigherDoFsEnd"
+				"element_type"
+			],
+			[
+				"compute_",
+				"compute_L2NormDifference2"
+			],
+			[
+				"element",
+				"elementHigherDoFsStart"
 			],
 			[
 				"calcualte",
 				"calculate_elementDoFs"
-			],
-			[
-				"element",
-				"element_type"
 			],
 			[
 				"elem",
@@ -40,10 +48,6 @@
 				"interface_compute_uh"
 			],
 			[
-				"compute_",
-				"compute_uh_single"
-			],
-			[
 				"allo",
 				"allocatable"
 			],
@@ -54,10 +58,6 @@
 			[
 				"file",
 				"fileNo"
-			],
-			[
-				"load",
-				"loadVector_u0"
 			],
 			[
 				"cal",
@@ -300,19 +300,10 @@
 	"buffers":
 	[
 		{
-			"file": "src/mesh.f90",
-			"settings":
-			{
-				"buffer_size": 4695,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "src/solution.f90",
 			"settings":
 			{
-				"buffer_size": 4456,
+				"buffer_size": 5934,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -321,7 +312,43 @@
 			"file": "src/solution_cg.f90",
 			"settings":
 			{
-				"buffer_size": 15332,
+				"buffer_size": 16495,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/refinement.f90",
+			"settings":
+			{
+				"buffer_size": 2025,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/element_interval.f90",
+			"settings":
+			{
+				"buffer_size": 7117,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/solvers_linear.f90",
+			"settings":
+			{
+				"buffer_size": 11161,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "tests/test.f90",
+			"settings":
+			{
+				"buffer_size": 3170,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -336,37 +363,10 @@
 			}
 		},
 		{
-			"file": "tests/test.f90",
+			"file": "src/plot_solution_u.py",
 			"settings":
 			{
-				"buffer_size": 3082,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/plot_solution.py",
-			"settings":
-			{
-				"buffer_size": 529,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/common.f90",
-			"settings":
-			{
-				"buffer_size": 4296,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/solvers_linear.f90",
-			"settings":
-			{
-				"buffer_size": 11161,
+				"buffer_size": 456,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -561,30 +561,29 @@
 	[
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/bin",
-		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/data",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/lib",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/tests"
 	],
 	"file_history":
 	[
-		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/refinement.f90",
-		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/element_interval.f90",
-		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/element.f90",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/data/solution.dat",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/solution.f90",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/mesh.f90",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/quadrature.f90",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/element_interval.f90",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/common.f90",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/refinement.f90",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/element.f90",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/solution_cg.f90",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/makefile.sources",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/module refinement",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/tests/test.f90",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/plot_solution.py",
-		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/mesh.f90",
-		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/common.f90",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/AptoFEM/AptoFEM/tutorials/output/data_poisson_with_titles_16.dat",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/AptoFEM/AptoFEM/tutorials/output/data_poisson_7.dat",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/solvers_linear.f90",
-		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/data/solution.dat",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/README.md",
-		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/quadrature.f90",
 		"/D/testfile.dat",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/tests/matrix_test.f90",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/matrix_sparse.f90",
@@ -713,6 +712,16 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"::",
+			"type(solution_cg)",
+			"type",
+			"0.93",
+			"0.98",
+			"compute_uh_single",
+			"coordinates",
+			"double(1)",
+			"2",
+			"m+1",
 			"k",
 			"elementDoFs",
 			"::",
@@ -830,17 +839,7 @@
 			"type",
 			"function",
 			"!-------------------------------------------------------------------\n!> This routine allocates the necessary storage for the element, and\n!! stores the element connectivity array\n!!\n!! Author: Paul Houston\n!!\n!! Date Created: 24-07-2012\n!-------------------------------------------------------------------",
-			"function",
-			"constructor",
-			"%",
-			"set_",
-			"::",
-			"basisLegendre",
-			"mapLocalToGlobal",
-			"::",
-			"basisLobatto =",
-			"legendrePolynomial =",
-			"::"
+			"function"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -858,54 +857,24 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 5,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/mesh.f90",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4695,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2909,
-								2909
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Fortran/grammars/FortranModern.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 975.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "src/solution.f90",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4456,
+						"buffer_size": 5934,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								139,
-								139
+								21,
+								21
 							]
 						],
 						"settings":
@@ -922,20 +891,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 1,
 					"file": "src/solution_cg.f90",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 15332,
+						"buffer_size": 16495,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2585,
-								2585
+								5376,
+								5376
 							]
 						],
 						"settings":
@@ -945,138 +914,74 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1044.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 1,
-			"sheets":
-			[
-				{
-					"buffer": 3,
-					"file": "tests/test_refinement.f90",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 563,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								315,
-								315
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Fortran/grammars/FortranModern.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1984.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
+					"buffer": 2,
+					"file": "src/refinement.f90",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2025,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								801,
+								801
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Fortran/grammars/FortranModern.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 26.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/element_interval.f90",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7117,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5857,
+								5857
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Fortran/grammars/FortranModern.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2028.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
 					"buffer": 4,
-					"file": "tests/test.f90",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3082,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1123,
-								1123
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Fortran/grammars/FortranModern.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 78.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "src/plot_solution.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 529,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								517,
-								517
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "src/common.f90",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4296,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								513,
-								513
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Fortran/grammars/FortranModern.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
 					"file": "src/solvers_linear.f90",
 					"semi_transient": false,
 					"settings":
@@ -1088,8 +993,74 @@
 						"selection":
 						[
 							[
-								136,
-								136
+								7303,
+								7303
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Fortran/grammars/FortranModern.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2469.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "tests/test.f90",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3170,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1377,
+								1377
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Fortran/grammars/FortranModern.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 256.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 6,
+					"file": "tests/test_refinement.f90",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 563,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								279,
+								279
 							]
 						],
 						"settings":
@@ -1102,7 +1073,35 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "src/plot_solution_u.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 456,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								456,
+								456
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1148,7 +1147,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 237.0
+		"height": 139.0
 	},
 	"output.find_results":
 	{

@@ -18,20 +18,20 @@ module class_element_interval
         procedure :: destructor => element_interval_destructor
 
         ! Getters.
-        procedure :: get_elementQuadrature
-        procedure :: get_Jacobian
-        procedure :: get_localCoordinates
-        procedure :: get_globalCoordinates
-        procedure :: get_typeName
+        procedure :: get_elementQuadrature => element_interval_get_elementQuadrature
+        procedure :: get_Jacobian          => element_interval_get_Jacobian
+        procedure :: get_localCoordinates  => element_interval_get_localCoordinates
+        procedure :: get_globalCoordinates => element_interval_get_globalCoordinates
+        procedure :: get_typeName          => element_interval_get_typeName
 
         ! Maps.
-        procedure :: map_localToGlobal
+        procedure :: map_localToGlobal => element_interval_map_localToGlobal
 
         ! Misc methods.
-        procedure :: basisLegendre
-        procedure :: basisLobatto
-        procedure :: evaluateBasisLegendre
-        procedure :: evaluateBasisLobatto
+        procedure :: basisLegendre         => element_interval_basisLegendre
+        procedure :: basisLobatto          => element_interval_basisLobatto
+        procedure :: evaluateBasisLegendre => element_interval_evaluateBasisLegendre
+        procedure :: evaluateBasisLobatto  => element_interval_evaluateBasisLobatto
     end type element_interval
 
 contains
@@ -56,7 +56,7 @@ contains
         deallocate(this%nodeCoordinates)
     end subroutine
 
-    subroutine get_elementQuadrature(this, a_coordinates, a_weights)
+    subroutine element_interval_get_elementQuadrature(this, a_coordinates, a_weights)
         class(element_interval), intent(inout) :: this
         real(dp), dimension(:), allocatable    :: a_coordinates
         real(dp), dimension(:), allocatable    :: a_weights
@@ -64,8 +64,7 @@ contains
         integer :: n
         integer :: i
 
-        !n = ceiling(real(2*this%polynomialDegree + 1, dp)/2) + 1
-        n = 3
+        n = ceiling(real(2*this%polynomialDegree + 1, dp)/2) + 1
 
         allocate(a_coordinates(n))
         allocate(a_weights    (n))
@@ -74,69 +73,69 @@ contains
             a_coordinates(i) = GaussLegendrePoint (n, i)
             a_weights    (i) = GaussLegendreWeight(n, i)
         end do
-    end subroutine get_elementQuadrature
+    end subroutine element_interval_get_elementQuadrature
 
-    function get_Jacobian(this)
+    function element_interval_get_Jacobian(this)
         class(element_interval), intent(inout) :: this
-        real(dp)                               :: get_Jacobian
+        real(dp)                               :: element_interval_get_Jacobian
 
-        get_Jacobian = (this%get_globalCoordinates(2) - this%get_globalCoordinates(1))/2
-    end function get_Jacobian
+        element_interval_get_Jacobian = (this%get_globalCoordinates(2) - this%get_globalCoordinates(1))/2
+    end function element_interval_get_Jacobian
 
-    function get_localCoordinates(this, a_coordinateNumber)
+    function element_interval_get_localCoordinates(this, a_coordinateNumber)
         class(element_interval), intent(inout) :: this
-        real(dp)                               :: get_localCoordinates
+        real(dp)                               :: element_interval_get_localCoordinates
         integer                                :: a_coordinateNumber
 
         if (a_coordinateNumber == 1) then
-            get_localCoordinates = -1
+            element_interval_get_localCoordinates = -1
         else
-            get_localCoordinates = 1
+            element_interval_get_localCoordinates = 1
         end if
     end function
 
-    function get_globalCoordinates(this, a_coordinateNumber)
+    function element_interval_get_globalCoordinates(this, a_coordinateNumber)
         class(element_interval), intent(inout) :: this
-        real(dp)                               :: get_globalCoordinates
+        real(dp)                               :: element_interval_get_globalCoordinates
         integer                                :: a_coordinateNumber
 
         integer :: index
 
         index = this%nodeIndices(a_coordinateNumber)
 
-        get_globalCoordinates = this%nodeCoordinates(index)
+        element_interval_get_globalCoordinates = this%nodeCoordinates(index)
     end function
 
-    function get_typeName(this)
+    function element_interval_get_typeName(this)
         class(element_interval), intent(inout) :: this
-        character(len=32)                      :: get_typeName
+        character(len=32)                      :: element_interval_get_typeName
 
-        get_typeName = 'element_interval'
+        element_interval_get_typeName = 'element_interval'
     end function
 
-    function map_localToGlobal(this, a_xi)
+    function element_interval_map_localToGlobal(this, a_xi)
         class(element_interval), intent(inout) :: this
         real(dp)                               :: a_xi
-        real(dp)                               :: map_localToGlobal
+        real(dp)                               :: element_interval_map_localToGlobal
 
-        map_localToGlobal = this%get_globalCoordinates(1) + (a_xi + 1)*this%get_Jacobian()
+        element_interval_map_localToGlobal = this%get_globalCoordinates(1) + (a_xi + 1)*this%get_Jacobian()
     end function
 
-    function basisLegendre(this, a_degree, a_deriv, a_point)
+    function element_interval_basisLegendre(this, a_degree, a_deriv, a_point)
         use quadrature
 
         class(element_interval), intent(inout) :: this
         integer                                :: a_degree
         integer                                :: a_deriv
         real(dp)                               :: a_point
-        real(dp)                               :: basisLegendre
+        real(dp)                               :: element_interval_basisLegendre
         real(dp)                               :: temp1
         real(dp)                               :: temp2
 
-        basisLegendre = legendrePolynomial(a_degree, a_deriv, a_point)
+        element_interval_basisLegendre = legendrePolynomial(a_degree, a_deriv, a_point)
     end function
 
-    recursive function basisLobatto(this, a_degree, a_deriv, a_point) result(BL)
+    recursive function element_interval_basisLobatto(this, a_degree, a_deriv, a_point) result(BL)
         class(element_interval), intent(inout) :: this
         integer                                :: a_degree
         integer                                :: a_deriv
@@ -168,7 +167,7 @@ contains
         end if
     end function
 
-    subroutine evaluateBasisLegendre(this, a_basisPoints, a_degree, a_deriv, a_points)
+    subroutine element_interval_evaluateBasisLegendre(this, a_basisPoints, a_degree, a_deriv, a_points)
         class(element_interval)             :: this
         real(dp), dimension(:), allocatable :: a_basisPoints
         integer                             :: a_degree
@@ -182,11 +181,11 @@ contains
         allocate(a_basisPoints(n))
 
         do i = 1, n
-            a_basisPoints(i) = basisLegendre(this, a_degree, a_deriv, a_points(i))
+            a_basisPoints(i) = element_interval_basisLegendre(this, a_degree, a_deriv, a_points(i))
         end do
     end subroutine
 
-    subroutine evaluateBasisLobatto(this, a_basisPoints, a_degree, a_deriv, a_points)
+    subroutine element_interval_evaluateBasisLobatto(this, a_basisPoints, a_degree, a_deriv, a_points)
         class(element_interval)             :: this
         real(dp), dimension(:), allocatable :: a_basisPoints
         integer                             :: a_degree
@@ -200,7 +199,7 @@ contains
         allocate(a_basisPoints(n))
 
         do i = 1, n
-            a_basisPoints(i) = basisLobatto(this, a_degree, a_deriv, a_points(i))
+            a_basisPoints(i) = element_interval_basisLobatto(this, a_degree, a_deriv, a_points(i))
         end do
     end subroutine
 end module class_element_interval

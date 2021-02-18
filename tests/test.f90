@@ -40,7 +40,7 @@ program test
     type(solution_cg) :: mySolution
 
     !call myMesh%constructor_ex(0)
-    call myMesh%constructor_eq(16, 3)
+    call myMesh%constructor_eq(256, 1)
     call mySolution%constructor(myMesh, func_one, 0.0001_dp, func_one, func_boundaryem4)
 
     ! print *, "Adam"
@@ -55,7 +55,8 @@ program test
     ! print *, myMesh%elements(1)%element_type%basisLobatto(1, 1, 0.5_dp)
 
     call mySolution%solve()
-    call mySolution%output_solution()
+    call mySolution%output_solution_u(func_boundaryem4)
+    !print *, mySolution%compute_L2NormDifference2(func_boundaryem4)
 
     call mySolution%destructor()
     call myMesh%destructor()

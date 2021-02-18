@@ -158,8 +158,21 @@ contains
 
         real(dp) :: a
 
-        a = 1e-3
+        a = 1e-4
 
-        func_boundaryem4 = 1
+        func_boundaryem4 = -exp(x/sqrt(a))/(exp(1.0_dp/sqrt(a)) + 1) - (exp(-x/sqrt(a)) &
+            * exp(1.0_dp/sqrt(a)))/(exp(1.0_dp/sqrt(a)) + 1) + 1
+    end function
+
+    function func_boundaryem4_(x)
+        real(dp) :: func_boundaryem4_
+        real(dp) :: x
+
+        real(dp) :: a
+
+        a = 1e-4
+
+        func_boundaryem4_ = -exp(x/sqrt(a))/(exp(1.0_dp/sqrt(a)) + 1)/sqrt(a) &
+        + (exp(-x/sqrt(a)) * exp(1.0_dp/sqrt(a)))/(exp(1.0_dp/sqrt(a)) + 1)/sqrt(a)
     end function
 end module common

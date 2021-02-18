@@ -58,11 +58,12 @@ contains
 
         integer             :: iterations    = 0
         real(dp), parameter :: tolerance     = 1e-15
-        integer, parameter  :: maxIterations = 1e4   ! <-- This might want to be removed? 
+        !integer, parameter  :: maxIterations = 1e4   ! <-- This might want to be removed? 
 
         LegendrePolynomialRoot = -cos((2.0_dp*a_rootNo - 1)/(2.0_dp*a_degree)*pi)
 
-        do while (abs(LegendrePolynomial(a_degree, 0, LegendrePolynomialRoot)) >= tolerance .and. iterations < maxIterations)
+        !do while (abs(LegendrePolynomial(a_degree, 0, LegendrePolynomialRoot)) >= tolerance .and. iterations < maxIterations)
+        do while (abs(LegendrePolynomial(a_degree, 0, LegendrePolynomialRoot)) >= tolerance)
             LegendrePolynomialRoot = LegendrePolynomialRoot - LegendrePolynomial(a_degree, 0, LegendrePolynomialRoot)/ &
                LegendrePolynomial(a_degree, 1, LegendrePolynomialRoot)
             iterations = iterations + 1

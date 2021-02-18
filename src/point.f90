@@ -1,29 +1,29 @@
 module class_point
-    use common
+!     use common
 
-    implicit none
+!     implicit none
 
-    type point
-        integer :: dimension
-        real(dp), dimension(:), allocatable :: coordinates
-    contains
-        procedure :: point_constructor
-        procedure :: point_destructor
-    end type point
+!     type point
+!         integer :: dimension
+!         real(dp), dimension(:), allocatable :: coordinates
+!     contains
+!         procedure :: point_constructor
+!         procedure :: point_destructor
+!     end type point
 
-contains
-    subroutine point_constructor(this, dim)
-        class(point) :: this
-        integer      :: dim
+! contains
+!     subroutine point_constructor(this, dim)
+!         class(point) :: this
+!         integer      :: dim
 
-        this%dimension = dim
-        allocate(this%coordinates(dim))
-    end subroutine
+!         this%dimension = dim
+!         allocate(this%coordinates(dim))
+!     end subroutine
 
-    subroutine point_destructor(this)
-        class(point) :: this
+!     subroutine point_destructor(this)
+!         class(point) :: this
 
-        deallocate(this%coordinates)
-    end subroutine
+!         deallocate(this%coordinates)
+!     end subroutine
 
 end module class_point
