@@ -10,6 +10,7 @@ module class_mesh
 
     type mesh
         integer                                   :: noElements
+        integer                                   :: noFaces
         class(element), dimension(:), allocatable :: elements
         integer                                   :: problemDimension
         integer, dimension(:, :), allocatable     :: elementConnectivity
@@ -52,6 +53,7 @@ contains
             this%problemDimension = 1
 
             this%noElements  = 4
+            this%noFaces     = 5
             domainLeft  = 0
             domainRight = 1
             h = (domainRight - domainLeft)/this%noElements
@@ -108,6 +110,7 @@ contains
         this%problemDimension = 1
 
         this%noElements  = a_noElements
+        this%noFaces     = a_noElements+1
         domainLeft  = 0
         domainRight = 1
         h = (domainRight - domainLeft)/this%noElements

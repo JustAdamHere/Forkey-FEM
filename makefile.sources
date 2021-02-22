@@ -10,4 +10,5 @@ SRCS = common.f90 \
 	solvers_linear.f90 \
 	solution.f90 \
 	solution_cg.f90 \
+	solution_dg.f90 \
 	refinement.f90

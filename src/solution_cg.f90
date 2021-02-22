@@ -44,20 +44,20 @@ module class_solution_cg
         procedure :: output_solution_u => solution_cg_output_solution_u
     end type
 
-    interface
-        function integer_integer(x)
-            use common
+    ! interface
+    !     function integer_integer(x)
+    !         use common
 
-            integer :: x
-            integer :: integer_integer
-        end function
-    end interface
+    !         integer :: x
+    !         integer :: integer_integer
+    !     end function
+    ! end interface
 
-    interface
-        subroutine nothing()
+    ! interface
+    !     subroutine nothing()
 
-        end subroutine
-    end interface
+    !     end subroutine
+    ! end interface
 
     ! interface
     !     function interface_basis(this, a_degree, a_deriv, a_point)
@@ -107,12 +107,10 @@ contains
         integer                                :: i, j, k
         type(element)                          :: currentElement
         integer                                :: p
-        integer                                :: startDoF, endDoF
         real(dp), dimension(:), allocatable    :: basis, basis1, basis2, basis1_, basis2_
         real(dp), dimension(:), allocatable    :: quadPoints, quadWeights
         real(dp), dimension(:), allocatable    :: loadVector_u0, u0
         integer, dimension(:), allocatable     :: elementDoFs
-        integer                                :: elementHigherDoFsStart, elementHigherDoFsEnd
 
         real(dp) :: stiffnessNorm
         real(dp) :: loadNorm
