@@ -14,7 +14,7 @@ module class_solution_dg
         procedure(double_double), pointer, nopass :: f => null()
         real(dp)                                  :: epsilon
         procedure(double_double), pointer, nopass :: c => null()
-        integer, dimension(:), allocatable        :: startHigherDoFs
+        integer, dimension(:), allocatable        :: startDoFs
     contains
         ! Constructors.
         procedure :: constructor => solution_dg_constructor
@@ -65,7 +65,7 @@ contains
     subroutine solution_dg_destructor(this)
         class(solution_dg) :: this
 
-        deallocate(this%startHigherDoFs)
+        deallocate(this%startDoFs)
         deallocate(this%uh)
     end subroutine
 
@@ -145,12 +145,15 @@ contains
 
         do f = 1, o
             ! Left face.
-            if (f == 0) then
+            if (f == 1) then
                 k = f
 
                 currentElement = this%solutionMesh%elements(k)
                 p              = currentElement%element_type%polynomialDegree
                 Jacobian       = currentElement%element_type%get_Jacobian()
+
+                h     = 2*Jacobian
+                sigma = 10*p**2/h
 
                 call currentElement%element_type%get_elementQuadrature(quadPoints, quadWeights)
 
@@ -187,6 +190,9 @@ contains
                 p              = currentElement%element_type%polynomialDegree
                 Jacobian       = currentElement%element_type%get_Jacobian()
 
+                h     = 2*Jacobian
+                sigma = 10*p**2/h
+
                 call currentElement%element_type%get_elementQuadrature(quadPoints, quadWeights)
 
                 call solution_dg_calculate_elementDoFs(this, k, elementDoFs)
@@ -204,7 +210,7 @@ contains
                         u_ = currentElement%element_type%basisLegendre(i1, 1, 1.0_dp)/Jacobian
                         v_ = currentElement%element_type%basisLegendre(j1, 1, 1.0_dp)/Jacobian
 
-                        b = -this%epsilon*(u_)*(-v) + theta*this%epsilon*(v_)*(-u) + sigma*(-u)*(-v)
+                        b = -this%epsilon*(u_)*(v) + theta*this%epsilon*(v_)*(u) + sigma*(-u)*(-v)
 
                         stiffnessMatrix(i, j) = stiffnessMatrix(i, j) + b
                     end do
@@ -234,11 +240,11 @@ contains
                 call solution_dg_calculate_elementDoFs(this, k2, nextElementDoFs)
 
                 do j1 = 0, p1
-                    j = previousElementDoFs(j1)
+                    j = previousElementDoFs(j1+1)
 
                     ! --
                     do i1 = 0, p1
-                        i = previousElementDoFs(i1)
+                        i = previousElementDoFs(i1+1)
 
                         um  = previousElement%element_type%basisLegendre(i1, 0, 1.0_dp)
                         vm  = previousElement%element_type%basisLegendre(j1, 0, 1.0_dp)
@@ -252,7 +258,7 @@ contains
 
                     ! +-
                     do i1 = 0, p2
-                        i = nextElementDoFs(i1)
+                        i = nextElementDoFs(i1+1)
 
                         up  = nextElement    %element_type%basisLegendre(i1, 0, -1.0_dp)
                         vm  = previousElement%element_type%basisLegendre(j1, 0,  1.0_dp)
@@ -266,11 +272,11 @@ contains
                 end do
 
                 do j1 = 0, p2
-                    j = nextElementDoFs(j1)
+                    j = nextElementDoFs(j1+1)
 
                     ! -+
                     do i1 = 0, p1
-                        i = previousElementDoFs(i1)
+                        i = previousElementDoFs(i1+1)
 
                         um  = previousElement%element_type%basisLegendre(i1, 0,  1.0_dp)
                         vp  = nextElement    %element_type%basisLegendre(j1, 0, -1.0_dp)
@@ -284,7 +290,7 @@ contains
 
                     ! ++
                     do i1 = 0, p2
-                        i = nextElementDoFs(i1)
+                        i = nextElementDoFs(i1+1)
 
                         up  = nextElement%element_type%basisLegendre(i1, 0, -1.0_dp)
                         vp  = nextElement%element_type%basisLegendre(j1, 0, -1.0_dp)
@@ -297,16 +303,14 @@ contains
                     end do
                 end do
 
-                call direct(stiffnessMatrix, loadVector, this%uh)
-
-                print *, this%uh
-
                 deallocate(nextElementDoFs)
                 deallocate(previousElementDoFs)
             end if
         end do
 
+        call direct(stiffnessMatrix, loadVector, this%uh)
 
+        print *, this%uh
 
         deallocate(loadVector)
         deallocate(stiffnessMatrix)
@@ -317,7 +321,19 @@ contains
         integer                             :: a_k
         integer, dimension(:), allocatable  :: a_elementDoFs
         
+        integer :: elementDoFsStart, elementDoFsEnd
+        integer :: j
+        integer :: p
 
+        p = this%solutionMesh%elements(a_k)%element_type%polynomialDegree
+
+        allocate(a_elementDoFs(p+1))
+
+        elementDoFsStart = this%startDoFs(a_k)
+        elementDoFsEnd   = this%startDoFs(a_k+1)
+        do j = 1, elementDoFsEnd-elementDoFsStart
+            a_elementDoFs(j) = elementDoFsStart + j-1
+        end do
     end subroutine
 
     ! subroutine calculate_DoFs(this) ! Um, be careful of CG and DG?!??!
@@ -356,10 +372,25 @@ contains
     !     this%DoFs = this%startDoFs(m+1)
     ! end subroutine
 
-     subroutine solution_dg_calculate_DoFs(this)
+    subroutine solution_dg_calculate_DoFs(this)
         class(solution_dg) :: this
 
-       
+        integer :: i
+        integer :: m
+        integer :: p
+
+        m = this%solutionMesh%noElements
+
+        allocate(this%startDoFs(m+1))
+
+        this%startDoFs(1) = 1
+        do i = 2, m+1
+            p = this%solutionMesh%elements(i-1)%element_type%polynomialDegree
+
+            this%startDoFs(i) = this%startDoFs(i-1) + p+1
+        end do
+
+        this%DoFs = this%startDoFs(m+1) - 1
     end subroutine
 
     function solution_dg_get_typeName(this)
@@ -442,7 +473,40 @@ contains
         integer            :: a_deriv
         real(dp)           :: a_xi
 
-        
+        real(dp), dimension(:), allocatable :: xi
+        class(element), pointer             :: currentElement
+        real(dp)                            :: Jacobian
+        integer                             :: startDoF, endDoF
+        integer                             :: i, i1, j
+        integer                             :: n
+        integer                             :: p
+        real(dp), dimension(:), allocatable :: basis
+        integer, dimension(:), allocatable  :: elementDoFs
+
+        currentElement => this%solutionMesh%elements(a_elementNo)
+        Jacobian = currentElement%element_type%get_Jacobian()
+        p        = currentElement%element_type%polynomialDegree
+
+        allocate(xi(1))
+        xi(1) = a_xi
+
+        solution_dg_compute_uh_single = 0
+
+        call solution_dg_calculate_elementDoFs(this, a_elementNo, elementDoFs)
+
+        do i1 = 0, p
+            i = elementDoFs(i1+1)
+            call currentElement%element_type%evaluateBasisLegendre(basis, i1, a_deriv, xi)
+
+            solution_dg_compute_uh_single = solution_dg_compute_uh_single + this%uh(i)*basis(1)
+
+            deallocate(basis)
+        end do
+
+        deallocate(elementDoFs)
+        deallocate(xi)
+
+        solution_dg_compute_uh_single = solution_dg_compute_uh_single / (Jacobian ** a_deriv)
 
     end function
 
@@ -453,20 +517,112 @@ contains
         integer                             :: a_deriv
         real(dp), dimension(:), allocatable :: a_xi
 
+        class(element), pointer             :: currentElement
+        real(dp)                            :: Jacobian
+        integer                             :: startDoF, endDoF
+        integer                             :: i, i1, j
+        integer                             :: n
+        integer                             :: p
+        real(dp), dimension(:), allocatable :: basis
+        integer, dimension(:), allocatable  :: elementDoFs
 
+        currentElement => this%solutionMesh%elements(a_elementNo)
+        Jacobian = currentElement%element_type%get_Jacobian()
+        p        = currentElement%element_type%polynomialDegree
+
+        n = size(a_xi, 1)
+        allocate(solution_dg_compute_uh(n))
+        solution_dg_compute_uh = 0
+
+        call solution_dg_calculate_elementDoFs(this, a_elementNo, elementDoFs)
+
+        do i1 = 0, p
+            i = elementDoFs(i1+1)
+            call currentElement%element_type%evaluateBasisLegendre(basis, i1, a_deriv, a_xi)
+
+            do j = 1, n
+                solution_dg_compute_uh(j) = solution_dg_compute_uh(j) + this%uh(i)*basis(j)
+            end do
+
+            deallocate(basis)
+        end do
+
+        deallocate(elementDoFs)
+
+        solution_dg_compute_uh = solution_dg_compute_uh / (Jacobian ** a_deriv)
     end function
 
     subroutine solution_dg_output_solution(this)
         class(solution_dg) :: this
 
-        
+        integer           :: fileNo
+        character(len=32) :: fileName
+        integer           :: i, j, n
+        integer           :: noSamples
+        real(dp)          :: h
+        real(dp)          :: x, xi, uh
+        integer           :: x1
+
+        n = this%solutionMesh%noElements
+
+        noSamples = 20
+        h = 2.0_dp/noSamples
+
+        fileNo = 1
+        fileName = './data/solution.dat'
+
+        open(fileNo, file=fileName, status='old')
+
+        write(fileNo, *) 0.0_dp, this%compute_uh_single(1, 0, -1.0_dp)
+        do i = 1, n
+            do j = 1, noSamples
+                xi = -1 + j*h
+                x = this%solutionMesh%elements(i)%element_type%map_localToGlobal(xi)
+
+                uh = this%compute_uh_single(i, 0, xi)
+
+                write(fileNo, *) x, uh
+            end do
+        end do
+
+        close(fileNo)
     end subroutine
 
     subroutine solution_dg_output_solution_u(this, a_function)
         class(solution_dg)       :: this
         procedure(double_double) :: a_function
 
-        
+        integer           :: fileNo
+        character(len=32) :: fileName
+        integer           :: i, j, n
+        integer           :: noSamples
+        real(dp)          :: h
+        real(dp)          :: x, xi, uh
+        integer           :: x1
+
+        n = this%solutionMesh%noElements
+
+        noSamples = 20
+        h = 2.0_dp/noSamples
+
+        fileNo = 1
+        fileName = './data/solution.dat'
+
+        open(fileNo, file=fileName, status='old')
+
+        write(fileNo, *) 0.0_dp, this%compute_uh_single(1, 0, -1.0_dp), a_function(0.0_dp)
+        do i = 1, n
+            do j = 1, noSamples
+                xi = -1 + j*h
+                x = this%solutionMesh%elements(i)%element_type%map_localToGlobal(xi)
+
+                uh = this%compute_uh_single(i, 0, xi)
+
+                write(fileNo, *) x, uh, a_function(x)
+            end do
+        end do
+
+        close(fileNo)
     end subroutine
 
 end module

@@ -40,7 +40,7 @@ program test
     type(solution_dg) :: mySolution
 
     !call myMesh%constructor_ex(0)
-    call myMesh%constructor_eq(4, 1)
+    call myMesh%constructor_eq(32, 5)
     call mySolution%constructor(myMesh, func_one, 0.0001_dp, func_one, func_boundaryem4)
 
     ! print *, "Adam"

@@ -225,6 +225,7 @@ contains
         class(solution_cg)                  :: this
         integer                             :: a_k
         integer, dimension(:), allocatable  :: a_elementDoFs
+        
         integer                             :: elementHigherDoFsStart, elementHigherDoFsEnd
         integer                             :: j
         integer                             :: p
