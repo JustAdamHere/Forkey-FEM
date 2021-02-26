@@ -19,6 +19,7 @@ module class_solution
         procedure(interface_get_typeName), deferred      :: get_typeName
 
         procedure :: compute_L2NormDifference2 => solution_compute_L2NormDifference2
+        procedure :: compute_H1NormDifference2 => solution_compute_H1NormDifference2
     end type
 
     abstract interface
@@ -103,6 +104,47 @@ contains
             deallocate(points)
         end do
     end function
+
+    function solution_compute_H1NormDifference2(this, a_u, a_u_1)
+        class(solution)          :: this
+        real(dp)                 :: solution_compute_H1NormDifference2
+        procedure(double_double) :: a_u
+        procedure(double_double) :: a_u_1
+
+        integer                             :: n
+        real(dp), dimension(:), allocatable :: points
+        real(dp), dimension(:), allocatable :: weights
+        class(element), pointer             :: currentElement
+        real(dp)                            :: Jacobian
+        integer                             :: i, j
+        real(dp)                            :: u
+        real(dp), dimension(:), allocatable :: uh
+        real(dp)                            :: x
+
+        n = this%solutionMesh%noElements
+
+        solution_compute_H1NormDifference2 = solution_compute_L2NormDifference2(this, a_u)
+
+        do i = 1, n
+            currentElement => this%solutionMesh%elements(i)
+            call currentElement%element_type%get_elementQuadrature(points, weights)
+
+            Jacobian = currentElement%element_type%get_Jacobian()
+            uh       = this%compute_uh(i, 1, points)
+
+            do j = 1, size(points)
+                x = currentElement%element_type%map_localToGlobal(points(j))
+                u = a_u_1(x)
+
+                solution_compute_H1NormDifference2 = solution_compute_H1NormDifference2 + (u - uh(j))**2 * weights(j) * Jacobian
+            end do
+
+            deallocate(uh)
+            deallocate(weights)
+            deallocate(points)
+        end do
+    end function
+
     ! subroutine output_solution_vtk(this)
     !     class(solution) :: this
 

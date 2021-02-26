@@ -310,8 +310,6 @@ contains
 
         call direct(stiffnessMatrix, loadVector, this%uh)
 
-        print *, this%uh
-
         deallocate(loadVector)
         deallocate(stiffnessMatrix)
     end subroutine
@@ -566,7 +564,7 @@ contains
         n = this%solutionMesh%noElements
 
         noSamples = 20
-        h = 2.0_dp/noSamples
+        h = 2.0_dp/(noSamples-1)
 
         fileNo = 1
         fileName = './data/solution.dat'
@@ -583,6 +581,7 @@ contains
 
                 write(fileNo, *) x, uh
             end do
+            write(fileNo, *) x, "NaN"
         end do
 
         close(fileNo)
@@ -603,7 +602,7 @@ contains
         n = this%solutionMesh%noElements
 
         noSamples = 20
-        h = 2.0_dp/noSamples
+        h = 2.0_dp/(noSamples-1)
 
         fileNo = 1
         fileName = './data/solution.dat'
@@ -613,13 +612,14 @@ contains
         write(fileNo, *) 0.0_dp, this%compute_uh_single(1, 0, -1.0_dp), a_function(0.0_dp)
         do i = 1, n
             do j = 1, noSamples
-                xi = -1 + j*h
+                xi = -1 + (j-1)*h
                 x = this%solutionMesh%elements(i)%element_type%map_localToGlobal(xi)
 
                 uh = this%compute_uh_single(i, 0, xi)
 
                 write(fileNo, *) x, uh, a_function(x)
             end do
+            write(fileNo, *) x, "NaN                        ", "NaN"
         end do
 
         close(fileNo)

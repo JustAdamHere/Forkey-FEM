@@ -56,9 +56,11 @@ contains
         integer  :: a_rootNo
         real(dp) :: LegendrePolynomialRoot
 
-        integer             :: iterations    = 0
+        integer             :: iterations
         real(dp), parameter :: tolerance     = 1e-15
         !integer, parameter  :: maxIterations = 1e4   ! <-- This might want to be removed? 
+
+        !iterations = 0
 
         LegendrePolynomialRoot = -cos((2.0_dp*a_rootNo - 1)/(2.0_dp*a_degree)*pi)
 

@@ -152,6 +152,13 @@ contains
         func_one = 1
     end function
 
+    function func_zero(x)
+        real(dp) :: func_zero
+        real(dp) :: x
+
+        func_zero = 0
+    end function
+
     function func_boundaryem4(x)
         real(dp) :: func_boundaryem4
         real(dp) :: x
@@ -174,5 +181,26 @@ contains
 
         func_boundaryem4_ = -exp(x/sqrt(a))/(exp(1.0_dp/sqrt(a)) + 1)/sqrt(a) &
         + (exp(-x/sqrt(a)) * exp(1.0_dp/sqrt(a)))/(exp(1.0_dp/sqrt(a)) + 1)/sqrt(a)
+    end function
+
+    function func_sinpi2(x)
+        real(dp) :: func_sinpi2
+        real(dp) :: x
+
+        func_sinpi2 = sin(2.0_dp*pi*x)
+    end function
+
+    function func_sinpi2_(x)
+        real(dp) :: func_sinpi2_
+        real(dp) :: x
+
+        func_sinpi2_ = 2.0_dp*pi * sin(2.0_dp*pi*x)
+    end function
+
+    function func_pi2sinpi2(x)
+        real(dp) :: func_pi2sinpi2
+        real(dp) :: x
+
+        func_pi2sinpi2 = (2.0_dp*pi)**2 * sin(2.0_dp*pi*x)
     end function
 end module common

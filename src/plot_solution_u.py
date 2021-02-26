@@ -14,6 +14,6 @@ plt.grid(True)
 plt.xlabel("x")
 plt.ylabel("u")
 plt.title("Solution Plot")
-plt.legend(loc="lower right")
+plt.legend()
 
 plt.show()

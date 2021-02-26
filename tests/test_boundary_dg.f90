@@ -39,24 +39,13 @@ program test
     type(mesh)        :: myMesh
     type(solution_dg) :: mySolution
 
-    !call myMesh%constructor_ex(0)
-    call myMesh%constructor_eq(32, 5)
+    call myMesh%constructor_eq(4, 1)
     call mySolution%constructor(myMesh, func_one, 0.0001_dp, func_one, func_boundaryem4)
-
-    ! print *, "Adam"
-    ! print *, myMesh%elements(2)%element_type%map_localToGlobal(0.0_dp)
-    ! print *, myMesh%elementConnectivity(:, :)
-    ! print *, ""
-
-    !print *, "Adam"
-    !print *, mySolution%f(1.0_dp)
-
-    ! print *, "Adam"
-    ! print *, myMesh%elements(1)%element_type%basisLobatto(1, 1, 0.5_dp)
 
     call mySolution%solve()
     call mySolution%output_solution_u(func_boundaryem4)
-    !print *, mySolution%compute_L2NormDifference2(func_boundaryem4)
+    print *, mySolution%compute_L2NormDifference2(func_boundaryem4)
+    print *, mySolution%compute_H1NormDifference2(func_boundaryem4, func_boundaryem4_)
 
     call mySolution%destructor()
     call myMesh%destructor()
