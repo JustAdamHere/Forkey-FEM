@@ -9,9 +9,11 @@ module class_solution
     public
 
     type, abstract :: solution
-        type(mesh), pointer                 :: solutionMesh => null()
-        real(dp), dimension(:), allocatable :: uh
-        integer                             :: DoFs
+        type(mesh), pointer                       :: solutionMesh => null()
+        real(dp), dimension(:), allocatable       :: uh
+        integer                                   :: DoFs
+        procedure(double_double), pointer, nopass :: u => null()
+        procedure(double_double), pointer, nopass :: u_1 => null()
     contains
         procedure(interface_compute_uh), deferred        :: compute_uh
         procedure(interface_compute_uh_single), deferred :: compute_uh_single
@@ -66,10 +68,9 @@ module class_solution
     end interface
 
 contains
-    function solution_compute_L2NormDifference2(this, a_u)
+    function solution_compute_L2NormDifference2(this)
         class(solution)          :: this
         real(dp)                 :: solution_compute_L2NormDifference2
-        procedure(double_double) :: a_u
 
         integer                             :: n
         real(dp), dimension(:), allocatable :: points
@@ -94,7 +95,7 @@ contains
 
             do j = 1, size(points)
                 x = currentElement%element_type%map_localToGlobal(points(j))
-                u = a_u(x)
+                u = this%u(x)
 
                 solution_compute_L2NormDifference2 = solution_compute_L2NormDifference2 + (u - uh(j))**2 * weights(j) * Jacobian
             end do
@@ -105,11 +106,9 @@ contains
         end do
     end function
 
-    function solution_compute_H1NormDifference2(this, a_u, a_u_1)
+    function solution_compute_H1NormDifference2(this)
         class(solution)          :: this
         real(dp)                 :: solution_compute_H1NormDifference2
-        procedure(double_double) :: a_u
-        procedure(double_double) :: a_u_1
 
         integer                             :: n
         real(dp), dimension(:), allocatable :: points
@@ -123,7 +122,7 @@ contains
 
         n = this%solutionMesh%noElements
 
-        solution_compute_H1NormDifference2 = solution_compute_L2NormDifference2(this, a_u)
+        solution_compute_H1NormDifference2 = solution_compute_L2NormDifference2(this)
 
         do i = 1, n
             currentElement => this%solutionMesh%elements(i)
@@ -134,7 +133,7 @@ contains
 
             do j = 1, size(points)
                 x = currentElement%element_type%map_localToGlobal(points(j))
-                u = a_u_1(x)
+                u = this%u_1(x)
 
                 solution_compute_H1NormDifference2 = solution_compute_H1NormDifference2 + (u - uh(j))**2 * weights(j) * Jacobian
             end do

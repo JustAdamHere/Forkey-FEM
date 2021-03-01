@@ -52,7 +52,7 @@ contains
     ! end subroutine
 
     subroutine refinement_refine(a_mesh, a_meshNew, a_solution, a_solutionNew, a_adaptivityTolerance, a_adaptivityMaxIterations, &
-        a_refineh, a_refinep, a_refineGlobally, a_output, a_u, a_u_1)
+        a_refineh, a_refinep, a_refineGlobally, a_output)
         type(mesh), target         :: a_mesh
         type(mesh), pointer        :: a_meshNew
         type(solution_dg), target  :: a_solution    ! <- Need to change to class(solution).
@@ -63,8 +63,6 @@ contains
         logical                    :: a_refinep
         logical                    :: a_refineGlobally
         logical                    :: a_output
-        procedure(double_double)   :: a_u
-        procedure(double_double)   :: a_u_1
 
         type(mesh), pointer        :: oldMesh
         type(mesh), pointer        :: newMesh
@@ -74,23 +72,90 @@ contains
         integer                    :: noPolys
         integer                    :: i
 
+        integer           :: fileNo
+        character(len=32) :: fileName
+
         oldMesh     => a_mesh
         oldSolution => a_solution
-        allocate(newMesh)
-        allocate(newSolution)
 
         if (a_refineGlobally .and. a_refineh) then
-            !do i = 1, a_adaptivityMaxIterations
+            if (a_output) then
+                fileNo   = 2
+                fileName = './data/convergence.dat'
+
+                open(fileNo, file=fileName, status='old')
+            end if
+
+            if (a_output) then
+                write(fileNo, *) oldSolution%DoFs, sqrt(oldSolution%compute_L2NormDifference2()), &
+                    sqrt(oldSolution%compute_H1NormDifference2())
+            end if
+
+            !-------+-------------------|
+            ! START | Refine h uniformly.
+            !-------+-------------------|
+
+            allocate(newMesh)
+            allocate(newSolution)
+
+            noElements = oldMesh%noElements
+            noPolys    = oldMesh%elements(1)%element_type%polynomialDegree ! <-- Assumes constant polynomial degree.
+
+            call newMesh%constructor_eq(2*noElements, noPolys)
+            call newSolution%constructor(newMesh, oldSolution%f, oldSolution%epsilon, oldSolution%c, oldSolution%u, oldSolution%u_1)
+            call newSolution%solve()
+
+            oldMesh     => newMesh
+            oldSolution => newSolution
+
+            !-----+-------------------|
+            ! END | Refine h uniformly.
+            !-----+-------------------|
+
+            if (a_output) then
+                write(fileNo, *) newSolution%DoFs, sqrt(newSolution%compute_L2NormDifference2()), &
+                    sqrt(newSolution%compute_H1NormDifference2())
+            end if
+
+            do i = 2, a_adaptivityMaxIterations
+                !-------+-------------------|
+                ! START | Refine h uniformly.
+                !-------+-------------------|
+
+                allocate(newMesh)
+                allocate(newSolution)
+
                 noElements = oldMesh%noElements
                 noPolys    = oldMesh%elements(1)%element_type%polynomialDegree ! <-- Assumes constant polynomial degree.
 
                 call newMesh%constructor_eq(2*noElements, noPolys)
-                call newSolution%constructor(newMesh, oldSolution%f, oldSolution%epsilon, oldSolution%c, func_sinpi2)
+                call newSolution%constructor(newMesh, oldSolution%f, oldSolution%epsilon, oldSolution%c, oldSolution%u, &
+                    oldSolution%u_1)
+                call newSolution%solve()
 
-                a_meshNew     => newMesh
-                a_solutionNew => newSolution
-            !end do
+                deallocate(oldMesh)
+                deallocate(oldSolution)
+
+                oldMesh     => newMesh
+                oldSolution => newSolution
+
+                !-------+-------------------|
+                ! END | Refine h uniformly.
+                !-------+-------------------|
+
+                if (a_output) then
+                    write(fileNo, *) newSolution%DoFs, sqrt(newSolution%compute_L2NormDifference2()), &
+                        sqrt(newSolution%compute_H1NormDifference2())
+                end if
+            end do
+
+            if (a_output) then
+                close(fileNo)
+            end if
         end if
+
+        a_meshNew     => newMesh
+        a_solutionNew => newSolution
     end subroutine
 
     subroutine refinement_refine_h(a_mesh, a_meshNew, a_solution, a_solutionNew, a_errorIndicators)

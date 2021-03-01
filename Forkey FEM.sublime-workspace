@@ -387,7 +387,16 @@
 			"file": "src/refinement.f90",
 			"settings":
 			{
-				"buffer_size": 3379,
+				"buffer_size": 5432,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "tests/hg_sine_dg.f90",
+			"settings":
+			{
+				"buffer_size": 1181,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -478,6 +487,34 @@
 				[
 					"Packages/Fortran/build-systems/GFortran.sublime-build",
 					"Run"
+				]
+			],
+			[
+				"Packages/Fortran/build-systems/GFortran.sublime-build",
+				"Run"
+			]
+		],
+		[
+			[
+				[
+					"Packages/Makefile/Make.sublime-build",
+					""
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					"Clean"
+				],
+				[
+					"Packages/Fortran/build-systems/GFortran.sublime-build",
+					""
+				],
+				[
+					"Packages/Fortran/build-systems/GFortran.sublime-build",
+					"Run"
+				],
+				[
+					"Packages/User/MakeRun.sublime-build",
+					""
 				]
 			],
 			[
@@ -598,6 +635,7 @@
 	],
 	"file_history":
 	[
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/delete me/Paul 20210226.f90",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/solution.f90",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/solution_dg.f90",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/mesh.f90",
@@ -724,8 +762,7 @@
 		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/articles.php",
 		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/createfeed.inc",
 		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/createpodcast.inc",
-		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/diary-book.php",
-		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/diary-confirm.php"
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/diary-book.php"
 	],
 	"find":
 	{
@@ -743,6 +780,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"New",
+			"procedure",
+			"::",
+			")",
+			"::",
 			" ::",
 			"class",
 			"func_boundaryem4",
@@ -865,12 +907,7 @@
 			"constructor",
 			"program test",
 			"entry",
-			"::",
-			"class_matrix_full",
-			"class_matrix",
-			"solvers_linear",
-			"module quadrature",
-			"function"
+			"::"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -888,7 +925,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -897,15 +934,45 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3379,
+						"buffer_size": 5432,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1463,
-								1463
+								2093,
+								2093
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Fortran/grammars/FortranModern.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 591.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "tests/hg_sine_dg.f90",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1181,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								584,
+								584
 							]
 						],
 						"settings":
@@ -928,7 +995,7 @@
 			"sheets":
 			[
 				{
-					"buffer": 1,
+					"buffer": 2,
 					"file": "src/plot_solution_u.py",
 					"semi_transient": false,
 					"settings":
@@ -940,8 +1007,8 @@
 						"selection":
 						[
 							[
-								428,
-								428
+								439,
+								439
 							]
 						],
 						"settings":
@@ -952,7 +1019,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -986,7 +1053,7 @@
 		"cols":
 		[
 			0.0,
-			0.742021963495,
+			0.805144887083,
 			1.0
 		],
 		"rows":

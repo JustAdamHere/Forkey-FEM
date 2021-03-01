@@ -1,8 +1,8 @@
 module common
     implicit none
 
-    integer, parameter :: dp = selected_real_kind(15)
-    integer, parameter :: pi = 4.0_dp * atan(1.0_dp)
+    integer, parameter  :: dp = selected_real_kind(15)
+    real(dp), parameter :: pi = 4.0_dp * atan(1.0_dp)
 
     interface
         function interface_basis(a_degree, a_deriv, a_point)

@@ -14,7 +14,6 @@ module class_solution_cg
         procedure(double_double), pointer, nopass :: f => null()
         real(dp)                                  :: epsilon
         procedure(double_double), pointer, nopass :: c => null()
-        !type(mesh), pointer                       :: solutionMesh => null()
         integer, dimension(:), allocatable        :: startHigherDoFs
     contains
         ! Constructors.
@@ -72,18 +71,21 @@ module class_solution_cg
     ! end interface
 
 contains
-    subroutine solution_cg_constructor(this, a_mesh, a_f, a_epsilon, a_c, a_u)
+    subroutine solution_cg_constructor(this, a_mesh, a_f, a_epsilon, a_c, a_u, a_u_1)
         class(solution_cg)       :: this
         class(mesh)              :: a_mesh
         procedure(double_double) :: a_f
         real(dp)                 :: a_epsilon
         procedure(double_double) :: a_c
         procedure(double_double) :: a_u
+        procedure(double_double) :: a_u_1
 
         this%solutionMesh =  a_mesh ! Is this making a copy?!
         this%f            => a_f
         this%epsilon      =  a_epsilon
         this%c            => a_c
+        this%u            => a_u
+        this%u_1          => a_u_1
 
         call solution_cg_calculate_DoFs(this)
 
@@ -494,9 +496,8 @@ contains
         close(fileNo)
     end subroutine
 
-    subroutine solution_cg_output_solution_u(this, a_function)
+    subroutine solution_cg_output_solution_u(this)
         class(solution_cg)       :: this
-        procedure(double_double) :: a_function
 
         integer           :: fileNo
         character(len=32) :: fileName
@@ -516,7 +517,7 @@ contains
 
         open(fileNo, file=fileName, status='old')
 
-        write(fileNo, *) 0.0_dp, this%compute_uh_single(1, 0, -1.0_dp), a_function(0.0_dp)
+        write(fileNo, *) 0.0_dp, this%compute_uh_single(1, 0, -1.0_dp), this%u(0.0_dp)
         do i = 1, n
             do j = 1, noSamples
                 xi = -1 + j*h
@@ -524,7 +525,7 @@ contains
 
                 uh = this%compute_uh_single(i, 0, xi)
 
-                write(fileNo, *) x, uh, a_function(x)
+                write(fileNo, *) x, uh, this%u(x)
             end do
         end do
 

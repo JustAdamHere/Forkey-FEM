@@ -19,17 +19,12 @@ program test
     ! allocate(myMesh)
     ! allocate(mySolution)
 
-    call myMesh%constructor_eq(8, 1)
-    call mySolution%constructor(myMesh, func_pi2sinpi2, 1.0_dp, func_zero, func_sinpi2)
+    call myMesh%constructor_eq(2, 1)
+    call mySolution%constructor(myMesh, func_pi2sinpi2, 1.0_dp, func_zero, func_sinpi2, func_sinpi2_)
 
-    call refinement_refine(myMesh, myNewMesh, mySolution, myNewSolution, 1e-15_dp, 10, .true., .false., .true., .true., &
-        func_sinpi2, func_sinpi2_)
+    call refinement_refine(myMesh, myNewMesh, mySolution, myNewSolution, 1e-15_dp, 5, .true., .false., .true., .true.)
 
-    ! call mySolution%solve()
-    ! call mySolution%output_solution_u(func_sinpi2)
-
-    call myNewSolution%solve()
-    call myNewSolution%output_solution_u(func_sinpi2)
+    call myNewSolution%output_solution_u() ! (already solved in refinement procedure)
 
     call myNewSolution%destructor()
     call myNewMesh%destructor()
@@ -38,8 +33,6 @@ program test
 
     deallocate(myNewSolution)
     deallocate(myNewMesh)
-    ! deallocate(mySolution)
-    ! deallocate(myMesh)
 contains
 
 end program test
