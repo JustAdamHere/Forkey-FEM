@@ -71,6 +71,8 @@ contains
         integer                    :: noElements
         integer                    :: noPolys
         integer                    :: i
+        real(dp)                   :: prevL2Norm, nextL2Norm, ratioL2Norm
+        real(dp)                   :: prevH1Norm, nextH1Norm, ratioH1Norm
 
         integer           :: fileNo
         character(len=32) :: fileName
@@ -84,11 +86,21 @@ contains
                 fileName = './data/convergence.dat'
 
                 open(fileNo, file=fileName, status='old')
+
+                print *, "       DoFs", "   L2 Ratio", "                  H1 Ratio"
             end if
 
             if (a_output) then
-                write(fileNo, *) oldSolution%DoFs, sqrt(oldSolution%compute_L2NormDifference2()), &
-                    sqrt(oldSolution%compute_H1NormDifference2())
+                prevL2Norm  = 0
+                prevH1Norm  = 0
+                nextL2Norm  = sqrt(oldSolution%compute_L2NormDifference2())
+                nextH1Norm  = sqrt(oldSolution%compute_H1NormDifference2())
+                ratioL2Norm = prevL2Norm/nextL2Norm
+                ratioH1Norm = prevH1Norm/nextH1Norm
+
+                write(fileNo, *) oldSolution%DoFs, nextL2Norm, nextH1Norm
+
+                print *, oldSolution%DoFs, ratioL2Norm, ratioH1Norm
             end if
 
             !-------+-------------------|
@@ -113,8 +125,16 @@ contains
             !-----+-------------------|
 
             if (a_output) then
-                write(fileNo, *) newSolution%DoFs, sqrt(newSolution%compute_L2NormDifference2()), &
-                    sqrt(newSolution%compute_H1NormDifference2())
+                prevL2Norm  = nextL2Norm
+                prevH1Norm  = nextH1Norm
+                nextL2Norm  = sqrt(newSolution%compute_L2NormDifference2())
+                nextH1Norm  = sqrt(newSolution%compute_H1NormDifference2())
+                ratioL2Norm = prevL2Norm/nextL2Norm
+                ratioH1Norm = prevH1Norm/nextH1Norm
+
+                write(fileNo, *) newSolution%DoFs, nextL2Norm, nextH1Norm
+
+                print *, newSolution%DoFs, ratioL2Norm, ratioH1Norm
             end if
 
             do i = 2, a_adaptivityMaxIterations
@@ -144,8 +164,16 @@ contains
                 !-------+-------------------|
 
                 if (a_output) then
-                    write(fileNo, *) newSolution%DoFs, sqrt(newSolution%compute_L2NormDifference2()), &
-                        sqrt(newSolution%compute_H1NormDifference2())
+                    prevL2Norm  = nextL2Norm
+                    prevH1Norm  = nextH1Norm
+                    nextL2Norm  = sqrt(newSolution%compute_L2NormDifference2())
+                    nextH1Norm  = sqrt(newSolution%compute_H1NormDifference2())
+                    ratioL2Norm = prevL2Norm/nextL2Norm
+                    ratioH1Norm = prevH1Norm/nextH1Norm
+
+                    write(fileNo, *) newSolution%DoFs, nextL2Norm, nextH1Norm
+
+                    print *, newSolution%DoFs, ratioL2Norm, ratioH1Norm
                 end if
             end do
 

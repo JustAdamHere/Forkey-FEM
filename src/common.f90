@@ -194,7 +194,7 @@ contains
         real(dp) :: func_sinpi2_
         real(dp) :: x
 
-        func_sinpi2_ = 2.0_dp*pi * sin(2.0_dp*pi*x)
+        func_sinpi2_ = 2.0_dp*pi * cos(2.0_dp*pi*x)
     end function
 
     function func_pi2sinpi2(x)
