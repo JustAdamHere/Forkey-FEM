@@ -19,9 +19,9 @@ program test
     call myMesh%constructor_eq(2, 1)
     call mySolution%constructor(myMesh, func_one, 0.0001_dp, func_one, func_boundaryem4, func_boundaryem4_)
 
-    call refinement_refine(myMesh, myNewMesh, mySolution, myNewSolution, 1e-15_dp, 10, .true., .false., .true., .true.)
+    call refinement_refine(myMesh, myNewMesh, mySolution, myNewSolution, 1e-15_dp, 5, .true., .false., .true., .true.)
 
-    call myNewSolution%output_solution_u() ! (already solved in refinement procedure)
+    call myNewSolution%output_solution_u() ! (already solved in refinement procedure, so don't need %solve())
 
     call myNewSolution%destructor()
     call myNewMesh%destructor()

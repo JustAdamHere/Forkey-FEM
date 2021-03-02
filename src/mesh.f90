@@ -17,7 +17,7 @@ module class_mesh
         real(dp), dimension(:), allocatable       :: nodeCoordinates
     contains
         ! Constructors.
-        procedure :: constructor => mesh_constructor
+        procedure :: constructor    => mesh_constructor
         procedure :: constructor_ex => mesh_constructor_ex
         procedure :: constructor_eq => mesh_constructor_eq
 
@@ -26,9 +26,44 @@ module class_mesh
     end type mesh
 
 contains
-    subroutine mesh_constructor(this, a_problemDimension)
-        class(mesh) :: this
-        integer     :: a_problemDimension
+    subroutine mesh_constructor(this, a_noElements, a_noFaces, a_problemDimension, a_elementConnectivity, a_nodeCoordinates)
+        class(mesh)                           :: this
+        integer                               :: a_noElements
+        integer                               :: a_noFaces
+        integer                               :: a_problemDimension
+        integer, dimension(:, :), allocatable :: a_elementConnectivity
+        real(dp), dimension(:), allocatable   :: a_nodeCoordinates
+
+        integer               :: i
+        integer, dimension(2) :: nodeIndices
+        integer               :: polynomialDegree
+
+        if (a_problemDimension == 1) then
+            this%problemDimension = a_problemDimension
+
+            this%noElements = a_noElements
+            this%noFaces    = a_noFaces
+
+            ! Node coordinates.
+            allocate(this%nodeCoordinates(this%noElements+1))
+            do i = 1, this%noElements+1
+                this%nodeCoordinates(i) = a_nodeCoordinates(i)
+            end do
+
+            ! Elements storage.
+            allocate(this%elements(this%noElements))
+            do i = 1, size(this%elements)
+                allocate(element_interval :: this%elements(i)%element_type)
+
+                nodeIndices(1) = i
+                nodeIndices(2) = i+1
+
+                polynomialDegree = 1
+
+                call this%elements(i)%element_type%constructor(i, &
+                    nodeIndices, this%nodeCoordinates, polynomialDegree)
+            end do
+        end if
     end subroutine
 
     subroutine mesh_constructor_ex(this, a_exampleNo)
@@ -52,8 +87,8 @@ contains
         if (a_exampleNo == 0) then
             this%problemDimension = 1
 
-            this%noElements  = 4
-            this%noFaces     = 5
+            this%noElements = 4
+            this%noFaces    = 5
             domainLeft  = 0
             domainRight = 1
             h = (domainRight - domainLeft)/this%noElements
