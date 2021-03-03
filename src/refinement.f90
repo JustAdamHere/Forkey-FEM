@@ -55,8 +55,8 @@ contains
         a_refineh, a_refinep, a_refineGlobally, a_output)
         type(mesh), target         :: a_mesh
         type(mesh), pointer        :: a_meshNew
-        type(solution_dg), target  :: a_solution    ! <- Need to change to class(solution).
-        type(solution_dg), pointer :: a_solutionNew ! <- Need to change to class(solution).
+        class(solution), target    :: a_solution    ! <- Need to change to class(solution).
+        class(solution), pointer   :: a_solutionNew ! <- Need to change to class(solution).
         real(dp)                   :: a_adaptivityTolerance
         integer                    :: a_adaptivityMaxIterations
         logical                    :: a_refineh
@@ -66,8 +66,8 @@ contains
 
         type(mesh), pointer        :: oldMesh
         type(mesh), pointer        :: newMesh
-        type(solution_dg), pointer :: oldSolution
-        type(solution_dg), pointer :: newSolution
+        class(solution), pointer   :: oldSolution
+        class(solution), pointer   :: newSolution
         integer                    :: noElements
         integer                    :: noPolys
         integer                    :: i
@@ -108,7 +108,11 @@ contains
             !-------+-------------------|
 
             allocate(newMesh)
-            allocate(newSolution)
+            if (oldSolution%get_typeName() == 'solution_cg') then
+                allocate(solution_cg :: newSolution)
+            else if (oldSolution%get_typeName() == 'solution_dg') then
+                allocate(solution_dg :: newSolution)
+            end if
 
             noElements = oldMesh%noElements
             noPolys    = oldMesh%elements(1)%element_type%polynomialDegree ! <-- Assumes constant polynomial degree.
@@ -143,7 +147,11 @@ contains
                 !-------+-------------------|
 
                 allocate(newMesh)
-                allocate(newSolution)
+                if (oldSolution%get_typeName() == 'solution_cg') then
+                    allocate(solution_cg :: newSolution)
+                else if (oldSolution%get_typeName() == 'solution_dg') then
+                    allocate(solution_dg :: newSolution)
+                end if
 
                 noElements = oldMesh%noElements
                 noPolys    = oldMesh%elements(1)%element_type%polynomialDegree ! <-- Assumes constant polynomial degree.
@@ -186,27 +194,30 @@ contains
         a_solutionNew => newSolution
     end subroutine
 
-    subroutine refinement_refine_h(a_mesh, a_meshNew, a_solution, a_solutionNew, a_errorIndicators)
+    subroutine refinement_refine_h(a_mesh, a_meshNew, a_solution, a_solutionNew, a_toRefine)
         type(mesh)                          :: a_mesh
         type(mesh), pointer                 :: a_meshNew
         class(solution)                     :: a_solution
         class(solution), pointer            :: a_solutionNew
-        real(dp), dimension(:), allocatable :: a_errorIndicators
+        logical, dimension(:), allocatable  :: a_toRefine
+
+        integer :: oldNoElements
+        integer :: newNoElements
     end subroutine
 
-    subroutine refinement_refine_p(a_mesh, a_meshNew, a_solution, a_solutionNew, a_errorIndicators)
+    subroutine refinement_refine_p(a_mesh, a_meshNew, a_solution, a_solutionNew, a_toRefine)
         type(mesh)                          :: a_mesh
         type(mesh), pointer                 :: a_meshNew
         class(solution)                     :: a_solution
         class(solution),pointer             :: a_solutionNew
-        real(dp), dimension(:), allocatable :: a_errorIndicators
+        logical, dimension(:), allocatable  :: a_toRefine
     end subroutine
 
-    subroutine refinement_refine_hp(a_mesh, a_meshNew, a_solution, a_solutionNew, a_errorIndicators)
+    subroutine refinement_refine_hp(a_mesh, a_meshNew, a_solution, a_solutionNew, a_toRefine)
         type(mesh)                          :: a_mesh
         type(mesh), pointer                 :: a_meshNew
         class(solution)                     :: a_solution
         class(solution),pointer             :: a_solutionNew
-        real(dp), dimension(:), allocatable :: a_errorIndicators
+        logical, dimension(:), allocatable  :: a_toRefine
     end subroutine
 end module

@@ -14,14 +14,24 @@ module class_solution
         integer                                   :: DoFs
         procedure(double_double), pointer, nopass :: u => null()
         procedure(double_double), pointer, nopass :: u_1 => null()
+        procedure(double_double), pointer, nopass :: f => null()
+        real(dp)                                  :: epsilon
+        procedure(double_double), pointer, nopass :: c => null()
     contains
         procedure(interface_compute_uh), deferred        :: compute_uh
         procedure(interface_compute_uh_single), deferred :: compute_uh_single
-        procedure(interface_output_solution), deferred   :: output_solution
         procedure(interface_get_typeName), deferred      :: get_typeName
 
         procedure :: compute_L2NormDifference2 => solution_compute_L2NormDifference2
         procedure :: compute_H1NormDifference2 => solution_compute_H1NormDifference2
+
+        procedure(interface_solve), deferred :: solve
+
+        procedure(interface_constructor), deferred :: constructor
+        procedure(interface_destructor), deferred  :: destructor
+
+        procedure(interface_output_solution), deferred   :: output_solution
+        procedure(interface_output_solution_u), deferred :: output_solution_u
     end type
 
     abstract interface
@@ -51,6 +61,39 @@ module class_solution
     end interface
 
     abstract interface
+        function interface_get_typeName(this)
+            import solution
+
+            class(solution)   :: this
+            character(len=32) :: interface_get_typeName
+        end function
+    end interface
+
+    abstract interface
+        subroutine interface_solve(this)
+            import solution
+
+            class(solution) :: this
+        end subroutine
+    end interface
+
+    abstract interface
+        subroutine interface_constructor(this, a_mesh, a_f, a_epsilon, a_c, a_u, a_u_1)
+            use common
+            import solution
+            import mesh
+
+            class(solution)          :: this
+            class(mesh)              :: a_mesh
+            procedure(double_double) :: a_f
+            real(dp)                 :: a_epsilon
+            procedure(double_double) :: a_c
+            procedure(double_double) :: a_u
+            procedure(double_double) :: a_u_1
+        end subroutine
+    end interface
+
+    abstract interface
         subroutine interface_output_solution(this)
             import solution
 
@@ -59,12 +102,19 @@ module class_solution
     end interface
 
     abstract interface
-        function interface_get_typeName(this)
+        subroutine interface_output_solution_u(this)
             import solution
 
-            class(solution)   :: this
-            character(len=32) :: interface_get_typeName
-        end function
+            class(solution) :: this
+        end subroutine
+    end interface
+
+    abstract interface
+        subroutine interface_destructor(this)
+            import solution
+
+            class(solution) :: this
+        end subroutine
     end interface
 
 contains

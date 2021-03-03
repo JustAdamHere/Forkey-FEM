@@ -14,7 +14,7 @@ program test
     type(mesh), target         :: myMesh
     type(solution_dg), target  :: mySolution
     type(mesh), pointer        :: myNewMesh
-    type(solution_dg), pointer :: myNewSolution
+    class(solution), pointer   :: myNewSolution
 
     ! allocate(myMesh)
     ! allocate(mySolution)
@@ -22,9 +22,11 @@ program test
     call myMesh%constructor_eq(2, 1)
     call mySolution%constructor(myMesh, func_pi2sinpi2, 1.0_dp, func_zero, func_sinpi2, func_sinpi2_)
 
-    call refinement_refine(myMesh, myNewMesh, mySolution, myNewSolution, 1e-15_dp, 5, .true., .false., .true., .true.)
+    call refinement_refine(myMesh, myNewMesh, mySolution, myNewSolution, 1e-15_dp, 1, .true., .false., .true., .true.)
 
     call myNewSolution%output_solution_u() ! (already solved in refinement procedure)
+
+    print *, myNewSolution%get_typeName()
 
     call myNewSolution%destructor()
     call myNewMesh%destructor()

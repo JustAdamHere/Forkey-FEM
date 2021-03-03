@@ -11,9 +11,6 @@ module class_solution_cg
     public
 
     type, extends(solution) :: solution_cg
-        procedure(double_double), pointer, nopass :: f => null()
-        real(dp)                                  :: epsilon
-        procedure(double_double), pointer, nopass :: c => null()
         integer, dimension(:), allocatable        :: startHigherDoFs
     contains
         ! Constructors.
@@ -206,9 +203,9 @@ contains
         end do
         stiffnessNorm = sqrt(stiffnessNorm)
 
-        print *, stiffnessNorm
-        print *, loadNorm
-        print *, norm(this%uh)
+        ! print *, stiffnessNorm
+        ! print *, loadNorm
+        ! print *, norm(this%uh)
 
         ! print *, ""
         ! print *, loadVector

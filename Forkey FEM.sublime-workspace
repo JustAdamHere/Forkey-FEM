@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"element",
+				"elements"
+			],
+			[
+				"node",
+				"nodeCoordinates"
+			],
+			[
+				"a_no",
+				"a_noElements"
+			],
+			[
+				"ratio",
+				"ratioL2Norm"
+			],
+			[
+				"prev",
+				"prevL2Norm"
+			],
+			[
+				"net",
+				"nextH1Norm"
+			],
+			[
 				"a_sol",
 				"a_solution"
 			],
@@ -130,10 +154,6 @@
 			[
 				"compute_",
 				"compute_L2NormDifference2"
-			],
-			[
-				"element",
-				"elementHigherDoFsStart"
 			],
 			[
 				"calcualte",
@@ -264,10 +284,6 @@
 				"get_elementQuadrature"
 			],
 			[
-				"node",
-				"a_nodeIndices"
-			],
-			[
 				"a_",
 				"a_elementNo"
 			],
@@ -314,10 +330,6 @@
 			[
 				"baiss",
 				"basisLegendre"
-			],
-			[
-				"prev",
-				"prevElement"
 			],
 			[
 				"prevEle",
@@ -387,17 +399,16 @@
 			"file": "src/refinement.f90",
 			"settings":
 			{
-				"buffer_size": 7649,
+				"buffer_size": 8836,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "src/solution_cg.f90",
+			"file": "src/common.f90",
 			"settings":
 			{
-				"buffer_size": 17420,
-				"encoding": "UTF-8",
+				"buffer_size": 5322,
 				"line_ending": "Windows"
 			}
 		},
@@ -626,6 +637,14 @@
 		"selected_items":
 		[
 			[
+				"pacakge",
+				"Preferences: Browse Packages"
+			],
+			[
+				"package",
+				"Preferences: Browse Packages"
+			],
+			[
 				"install",
 				"Package Control: Install Package"
 			]
@@ -662,6 +681,9 @@
 	],
 	"file_history":
 	[
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/mesh.f90",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/tests/hg_boundary_dg.f90",
+		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/solution_cg.f90",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/data/convergence.dat",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/common.f90",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/solution_dg.f90",
@@ -669,13 +691,11 @@
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/README.md",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/delete me/Paul 20210226.f90",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/solution.f90",
-		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/mesh.f90",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/tests/test_sine_dg.f90",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/tests/test_boundary_cg.f90",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/data/solution.dat",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/quadrature.f90",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/tests/test_refinement.f90",
-		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/solution_cg.f90",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/makefile.sources",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/plot_solution_u.py",
 		"/C/Users/adam/Blakey Cloud/Documents/Education/University of Nottingham/PhD/Programming Tests/Forkey FEM/Forkey FEM/src/point.f90",
@@ -788,12 +808,11 @@
 		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/article.php",
 		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/articles-add.php",
 		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/articles-update.php",
-		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/articles.php",
-		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/createfeed.inc"
+		"/C/Users/adam/Blakey Cloud/Documents/Keiron's Website/kanderson/htdocs/ka/articles.php"
 	],
 	"find":
 	{
-		"height": 39.0
+		"height": 22.0
 	},
 	"find_in_files":
 	{
@@ -807,6 +826,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"::",
+			",",
+			"L2",
+			"prev",
 			"log,",
 			"log",
 			"points",
@@ -930,11 +953,7 @@
 			"1",
 			"a_k",
 			"::",
-			"             ",
-			"            ",
-			"allocatable",
-			"dimension",
-			"="
+			"             "
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -952,7 +971,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -961,15 +980,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7649,
+						"buffer_size": 8836,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4940,
-								4940
+								1355,
+								1355
 							]
 						],
 						"settings":
@@ -979,27 +998,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1211.0,
+						"translation.y": 4.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "src/solution_cg.f90",
+					"file": "src/common.f90",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 17420,
+						"buffer_size": 5322,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2322,
-								2322
+								4927,
+								4927
 							]
 						],
 						"settings":
@@ -1009,7 +1028,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 561.0,
+						"translation.y": 2145.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 5,
@@ -1028,8 +1047,8 @@
 						"selection":
 						[
 							[
-								19190,
-								19190
+								22450,
+								22450
 							]
 						],
 						"settings":
@@ -1039,10 +1058,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 6450.0,
+						"translation.y": 7503.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -1072,7 +1091,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -1094,8 +1113,8 @@
 						"selection":
 						[
 							[
-								326,
-								326
+								434,
+								434
 							]
 						],
 						"settings":
@@ -1106,7 +1125,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -1122,8 +1141,8 @@
 						"selection":
 						[
 							[
-								355,
-								355
+								439,
+								439
 							]
 						],
 						"settings":
@@ -1134,7 +1153,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]

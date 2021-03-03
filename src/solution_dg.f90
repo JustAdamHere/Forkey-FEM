@@ -11,9 +11,6 @@ module class_solution_dg
     public
 
     type, extends(solution) :: solution_dg
-        procedure(double_double), pointer, nopass :: f => null()
-        real(dp)                                  :: epsilon
-        procedure(double_double), pointer, nopass :: c => null()
         integer, dimension(:), allocatable        :: startDoFs
     contains
         ! Constructors.
